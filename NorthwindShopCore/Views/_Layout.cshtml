@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/CSS/LayoutStyle.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+</head>
+<body>
+
+    <div id="header">
+        <h1 id="Title">Jessica Shop</h1>
+        <div id="userLayout">
+            <span id="SignIn">@Html.ActionLink("Sign In", "SignIn", "User")</span>
+            <span id="Register">@Html.ActionLink("Register", "Register", "User")</span>
+        </div>
+
+    </div>
+    <div id="sidebar">
+        <p>@Html.ActionLink("Confections", "Confections", "Home")</p>
+        <p>@Html.ActionLink("Beverages", "Beverages", "Home")</p>
+        <hr />
+        <br />
+        <br />
+        <br />
+        <br />
+        <p>@Html.ActionLink("Cart", "Cart", "Product")</p>
+    </div>
+    <div id="content">
+        @RenderBody()
+    </div>
+    <div id="footer">&copy;  2018 - USA. Jessica Shop</div>
+
+</body>
+</html>
