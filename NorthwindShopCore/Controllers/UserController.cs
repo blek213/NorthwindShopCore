@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NorthwindShopCore.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("User/[controller]")]
     public class UserController : Controller
     {
         // GET: api/values

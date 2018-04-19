@@ -4,10 +4,60 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="~/css/LayoutStyle.css" rel="stylesheet" />
-    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
 </head>
 <body>
+
+    <style>
+        #Title {
+            color: deeppink;
+        }
+
+        body {
+            font: 11pt Arial, Helvetica, sans-serif;
+            margin: 0;
+        }
+
+        #header {
+            background: #6EBEE8;
+            padding: 15px;
+        }
+
+        #sidebar {
+            float: left;
+            border: 1px solid #333;
+            width: 20%;
+            padding: 5px;
+            margin: 10px 10px 20px 5px;
+        }
+
+        #content {
+            font-size: 18px;
+            margin: 10px 5px 20px 25%;
+            padding: 5px;
+            border: 1px solid #333;
+        }
+
+        #footer {
+            background: #333;
+            padding: 5px;
+            color: #fff;
+            clear: left;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        #SignIn, #Register, #SignOff {
+            padding: 6px;
+            border: 1px solid #000000;
+        }
+
+        #userLayout {
+            text-align: right;
+        }
+
+    </style>
 
     <div id="header">
         <h1 id="Title">Jessica Shop</h1>
@@ -18,8 +68,8 @@
 
     </div>
     <div id="sidebar">
-        <p>@Html.ActionLink("Confections", "Confections", "Home")</p>
-        <p>@Html.ActionLink("Beverages", "Beverages", "Home")</p>
+        <p>@Html.ActionLink("Confections", "Confections", "Product")</p>
+        <p>@Html.ActionLink("Beverages", "Beverages", "Product")</p>
         <hr />
         <br />
         <br />
