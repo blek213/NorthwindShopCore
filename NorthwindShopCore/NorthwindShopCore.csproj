@@ -5,10 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Content\Scripts\site.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Content\CSS\" />
     <Folder Include="Data\" />
-    <Folder Include="Filters\" />
     <Folder Include="Models\" />
     <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,12 +21,23 @@
     <PackageReference Include="jQuery" Version="3.3.1" />
     <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.5" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\LayoutStyle.css" />
+    <None Include="wwwroot\css\ModalWindowCSS.css" />
+    <None Include="wwwroot\css\PagedList.css" />
+    <None Include="wwwroot\css\ProductCSS.css" />
+    <None Include="wwwroot\css\ValidationErrorStyle.css" />
+    <None Include="wwwroot\css\WindowCSS.css" />
   </ItemGroup>
 
 </Project>

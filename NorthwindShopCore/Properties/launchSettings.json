@@ -19,7 +19,7 @@
     "NorthwindShopCore": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "Values/Index",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
