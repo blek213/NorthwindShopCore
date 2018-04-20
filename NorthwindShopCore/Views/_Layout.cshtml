@@ -4,78 +4,86 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/LayoutStyle.css" type="text/css" />
+   
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+            asp-fallback-src="~/js/jquery.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+    </script>
 </head>
 <body>
+ <style>
 
-    <style>
-        #Title {
-            color: deeppink;
-        }
+     #Title {
+         color: deeppink;
+     }
 
-        body {
-            font: 11pt Arial, Helvetica, sans-serif;
-            margin: 0;
-        }
+     body {
+         font: 11pt Arial, Helvetica, sans-serif;
+         margin: 0;
+     }
 
-        #header {
-            background: #6EBEE8;
-            padding: 15px;
-        }
+     #header {
+         background: #6EBEE8;
+         padding: 15px;
+     }
 
-        #sidebar {
-            float: left;
-            border: 1px solid #333;
-            width: 20%;
-            padding: 5px;
-            margin: 10px 10px 20px 5px;
-        }
+     #sidebar {
+         float: left;
+         border: 1px solid #333;
+         width: 20%;
+         padding: 5px;
+         margin: 10px 10px 20px 5px;
+     }
 
-        #content {
-            font-size: 18px;
-            margin: 10px 5px 20px 25%;
-            padding: 5px;
-            border: 1px solid #333;
-        }
+     #content {
+         font-size: 18px;
+         margin: 10px 5px 20px 25%;
+         padding: 5px;
+         border: 1px solid #333;
+     }
 
-        #footer {
-            background: #333;
-            padding: 5px;
-            color: #fff;
-            clear: left;
-        }
+     #footer {
+         background: #333;
+         padding: 5px;
+         color: #fff;
+         clear: left;
+     }
 
-        a {
-            text-decoration: none;
-        }
+     a {
+         text-decoration: none;
+     }
 
-        #SignIn, #Register, #SignOff {
-            padding: 6px;
-            border: 1px solid #000000;
-        }
+     #SignIn, #Register, #SignOff {
+         padding: 6px;
+         border: 1px solid #000000;
+     }
 
-        #userLayout {
-            text-align: right;
-        }
+     #userLayout {
+         text-align: right;
+     }
 
-    </style>
-
+  </style>
+ 
     <div id="header">
         <h1 id="Title">Jessica Shop</h1>
         <div id="userLayout">
-            <span id="SignIn">@Html.ActionLink("Sign In", "SignIn", "User")</span>
-            <span id="Register">@Html.ActionLink("Register", "Register", "User")</span>
+            <span id="SignIn">@Html.ActionLink("Sign In", "SignIn", "User","api")</span>
+            <span id="Register">@Html.ActionLink("Register", "Register", "User","api")</span>
         </div>
 
     </div>
     <div id="sidebar">
-        <p>@Html.ActionLink("Confections", "Confections", "Product")</p>
-        <p>@Html.ActionLink("Beverages", "Beverages", "Product")</p>
+        <p>@Html.ActionLink("Confections","Confections", "Product","api")</p>
+        <p>@Html.ActionLink("Beverages", "Beverages", "Product","api")</p>
         <hr />
         <br />
         <br />
         <br />
         <br />
-        <p>@Html.ActionLink("Cart", "Cart", "Product")</p>
+        <p>@Html.ActionLink("Cart", "Cart", "Product","api")</p>
     </div>
     <div id="content">
         @RenderBody()

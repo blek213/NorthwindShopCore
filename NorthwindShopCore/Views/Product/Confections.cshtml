@@ -3,8 +3,50 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 <script  type="text/javascript">
-   
+
+    $(document).ready(function () {
+
+        ShowText();
+
+    });
+
+    function ShowText() {
+        /*
+        $.getJSON("api/Product/Confections", function (data) {
+            var result = $("#ConfectionsList");
+
+            for (var i = 0; i < data.length; i++) {
+
+                result.append('<p>' + data[i].ProductName + '</p>')
+            }
+        }
+
+*/
+        $.getJSON({
+            url: '/api/Product/Confections',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                var results = $("#ConfectionsList");
+
+                results.empty();
+
+                for (var i = 0; i < data.length; i++) {
+                    results.append('<p>' + data[i].ProductName + '</p>');
+                }
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+
+    }
 </script>
 
- 
+<div id="ConfectionsList">
+
+</div>
+
+
+
 

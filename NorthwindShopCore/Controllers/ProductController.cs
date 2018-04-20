@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using NorthwindShopCore.Models;
+using System.Runtime.Serialization.Formatters;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,18 +21,42 @@ namespace NorthwindShopCore.Controllers
         NORTHWNDContext DbNorthWind = new NORTHWNDContext();
 
         // GET: api/values
-        [HttpGet]
+        [HttpGet("Confections")]
         public IActionResult Confections()
         {
-            var confections = DbNorthWind.Products.FromSql("SELECT * FROM Products WHERE CategoryID = 3");
+            var confections = DbNorthWind.Products.Where(p => p.CategoryId == 3);
 
-            return Json(confections);
+            return View(confections);
         }
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+
+        
+        [HttpGet("Beverages")]
+        public IActionResult Beverages()
         {
-            return "value";
+            var beverages = DbNorthWind.Products.Where(p => p.CategoryId == 1);
+
+            return Json(beverages);
+        }
+        
+        // GET api/values/5
+        [HttpGet("Confection/{Id}")]
+        public IActionResult Confection(int? id)
+        {
+            id = 2;
+        
+            if(id == null)
+            {
+                var modelConfection = DbNorthWind.Products.First(p => p.ProductId == id);
+
+                var modelCategories = DbNorthWind.Categories.First(p => p.CategoryId == modelConfection.CategoryId);
+
+            
+
+                return Json(modelConfection);
+            }
+
+            return RedirectToAction("Confections", "Product", "api");
+
         }
 
         // POST api/values

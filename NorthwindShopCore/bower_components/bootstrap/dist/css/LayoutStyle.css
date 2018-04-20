@@ -1,0 +1,48 @@
+﻿#Title {
+    color: deeppink;
+}
+
+body {
+    font: 11pt Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+#header {
+    background: #6EBEE8;
+    padding: 15px;
+}
+
+#sidebar {
+    float: left;
+    border: 1px solid #333;
+    width: 20%;
+    padding: 5px;
+    margin: 10px 10px 20px 5px;
+}
+
+#content {
+    font-size: 18px;
+    margin: 10px 5px 20px 25%;
+    padding: 5px;
+    border: 1px solid #333;
+}
+
+#footer {
+    background: #333;
+    padding: 5px;
+    color: #fff;
+    clear: left;
+}
+
+a {
+    text-decoration: none;
+}
+
+#SignIn, #Register, #SignOff {
+    padding: 6px;
+    border: 1px solid #000000;
+}
+
+#userLayout {
+    text-align: right;
+}
