@@ -24,19 +24,30 @@ namespace NorthwindShopCore.Controllers
         [HttpGet("Confections")]
         public IActionResult Confections()
         {
-            var confections = DbNorthWind.Products.Where(p => p.CategoryId == 3);
 
-            return View(confections);
+            return View();
         }
 
-        
         [HttpGet("Beverages")]
         public IActionResult Beverages()
         {
             var beverages = DbNorthWind.Products.Where(p => p.CategoryId == 1);
 
+
             return Json(beverages);
         }
+
+        [HttpPost("ConfectionsJsonResult")]
+        public JsonResult ConfectionsJsonResult()
+        {
+            var confections = DbNorthWind.Products.Where(p => p.CategoryId == 3);
+
+           var JsonConfections = JsonConvert.SerializeObject(confections);
+
+            return Json(JsonConfections);
+        }
+        
+
         
         // GET api/values/5
         [HttpGet("Confection/{Id}")]
@@ -49,8 +60,6 @@ namespace NorthwindShopCore.Controllers
                 var modelConfection = DbNorthWind.Products.First(p => p.ProductId == id);
 
                 var modelCategories = DbNorthWind.Categories.First(p => p.CategoryId == modelConfection.CategoryId);
-
-            
 
                 return Json(modelConfection);
             }

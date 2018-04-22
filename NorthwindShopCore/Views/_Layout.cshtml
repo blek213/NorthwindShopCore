@@ -70,20 +70,20 @@
     <div id="header">
         <h1 id="Title">Jessica Shop</h1>
         <div id="userLayout">
-            <span id="SignIn">@Html.ActionLink("Sign In", "SignIn", "User","api")</span>
-            <span id="Register">@Html.ActionLink("Register", "Register", "User","api")</span>
+            <span id="SignIn"><a href="/api/User/SignIn">SignIn</a></span>
+            <span id="Register"><a href="/api/Product/Register">Register</a></span>
         </div>
 
     </div>
     <div id="sidebar">
-        <p>@Html.ActionLink("Confections","Confections", "Product","api")</p>
-        <p>@Html.ActionLink("Beverages", "Beverages", "Product","api")</p>
+        <p><a href="/api/Product/Confections">Confections</a></p>
+        <p><a href="/api/Product/Beverages">Beverages</a></p>
         <hr />
         <br />
         <br />
         <br />
         <br />
-        <p>@Html.ActionLink("Cart", "Cart", "Product","api")</p>
+        <p><a href="/api/Product/Cart">Cart</a></p>
     </div>
     <div id="content">
         @RenderBody()

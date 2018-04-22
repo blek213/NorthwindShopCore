@@ -2,38 +2,31 @@
     ViewData["Title"] = "Confections";
     Layout = "~/Views/_Layout.cshtml";
 }
+
 <script  type="text/javascript">
+    
+    setTimeout(ShowConfections, 1);
 
-    $(document).ready(function () {
+    function ShowConfections() {
 
-        ShowText();
-
-    });
-
-    function ShowText() {
-        /*
-        $.getJSON("api/Product/Confections", function (data) {
-            var result = $("#ConfectionsList");
-
-            for (var i = 0; i < data.length; i++) {
-
-                result.append('<p>' + data[i].ProductName + '</p>')
-            }
-        }
-
-*/
         $.getJSON({
-            url: '/api/Product/Confections',
-            type: 'GET',
+            type: 'POST',
             dataType: 'json',
+            contentType: 'application/JSON',
+            url: '/api/Product/ConfectionsJsonResult',
             success: function (data) {
+
                 var results = $("#ConfectionsList");
 
-                results.empty();
+                var confectionsObject = jQuery.parseJSON(data);
 
                 for (var i = 0; i < data.length; i++) {
-                    results.append('<p>' + data[i].ProductName + '</p>');
+
+                    var firststr = '<li><a href' + '=' + "'" + "/api/Product/Confection/"+  confectionsObject[i].ProductId + "'"+ '>';
+
+                    results.append(firststr + confectionsObject[i].ProductName + '</a></li>');
                 }
+                                    
             },
             error: function (x, y, z) {
                 alert(x + '\n' + y + '\n' + z);
@@ -41,12 +34,12 @@
         });
 
     }
+    
 </script>
 
-<div id="ConfectionsList">
+<ul type="square" id="ConfectionsList">
 
-</div>
-
+</ul>
 
 
 
