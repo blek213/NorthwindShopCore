@@ -4,5 +4,41 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 
+<script type="text/javascript">
+
+    setTimeout(ShowBeverages, 1);
+
+    function ShowBeverages() {
+
+        $.getJSON({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/JSON',
+            url: '/api/Product/BeveragesJsonResult',
+            success: function (data) {
+
+                var results = $("#BeveragesList");
+
+                var confectionsObject = jQuery.parseJSON(data);
+
+                for (var i = 0; i < data.length; i++) {
+
+                    var firststr = '<li><a href' + '=' + "'" + "/api/Product/Beverage/" + confectionsObject[i].ProductId + "'" + '>';
+
+                    results.append(firststr + confectionsObject[i].ProductName + '</a></li>');
+                }
+
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+
+    }
+</script>
 
 
+
+<ul type="square" id="BeveragesList">
+
+</ul>
