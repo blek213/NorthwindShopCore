@@ -107,6 +107,12 @@ namespace NorthwindShopCore.Controllers
 
         [HttpGet("Cart")]
         public IActionResult Cart()
+        {        
+            return View();
+        }
+
+        [HttpGet("CartJsonResult")]
+        public JsonResult CartJsonResult()
         {
             string cookieValueFromReq = Request.Cookies["ProductName"];
 
@@ -136,8 +142,15 @@ namespace NorthwindShopCore.Controllers
 
             var FoundModel = DbNorthWind.Products.First(p => p.ProductId == ProductId);
 
+            /*
+            var JsonResult = JsonConvert.SerializeObject(FoundModel);
 
-            return View();
+            return Json(new { count = 2, model = FoundModel});
+            */
+
+            var JsonResult = JsonConvert.SerializeObject(FoundModel);
+
+            return Json(JsonResult);
         }
 
         [HttpPost("Cart")]

@@ -4,3 +4,35 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 
+<script type="text/javascript">
+    setTimeout(ShowProducts, 1);
+
+    function ShowProducts() {
+        $.getJSON({
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/JSON',
+            url: '/api/Product/CartJsonResult',
+            success: function (data) {
+
+                alert(data);
+
+                var resuts = $("#ProductList");
+
+              
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+
+        });
+
+    }
+
+    
+
+</script>
+
+<div id="ProductList">
+
+</div>
