@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Confection";
+    ViewData["Title"] = "Beverage";
     Layout = "~/Views/_Layout.cshtml";
 }
 <style>
@@ -14,23 +14,22 @@
         text-align: justify;
         padding: 15px;
     }
-
 </style>
 
 <script type="text/javascript">
 
     var currentUrl = window.location.href;
 
-    var ConfectionIdVal=ParseIdFromUrl(currentUrl);
+    var BeverageIdVal=ParseIdFromUrl(currentUrl);
 
-    setTimeout(ShowConfection, 1);
+    setTimeout(ShowBeverage, 1);
 
-    function ShowConfection() {
+    function ShowBeverage() {
         $.getJSON({
             type: 'GET',
             dataType: 'json',
             contentType: 'application/JSON',
-            url: '/api/Product/ConfectionJsonResult/' + ConfectionIdVal,
+            url: '/api/Product/BeverageJsonResult/' + BeverageIdVal,
             success: function (data) {
 
                 var ProductNameResult = $("#ProductName");
@@ -39,11 +38,12 @@
 
                 var ProductUnitPrice = $("#UnitPrice");
 
-                var confectionObject = jQuery.parseJSON(data);
-           
-                ProductNameResult.append("<p>" + confectionObject[0].ProductName + "</p>");
-                ProductQuantityResult.append("<p>" + confectionObject[0].QuantityPerUnit + "</p>");
-                ProductUnitPrice.append("<p>" + confectionObject[0].UnitPrice + "</p>");
+                var beverageObject = jQuery.parseJSON(data);
+
+                ProductNameResult.append("<p>" + beverageObject[0].ProductName + "</p>");
+                ProductQuantityResult.append("<p>" + beverageObject[0].QuantityPerUnit + "</p>");
+                ProductUnitPrice.append("<p>" + beverageObject[0].UnitPrice + "</p>");
+               
             },
             error: function (x, y, z) {
                 alert(x + '\n' + y + '\n' + z);
@@ -54,7 +54,7 @@
 
     function ParseIdFromUrl(CurrentUrl) {
 
-        var GetIndexBeforeId = CurrentUrl.indexOf("on/");
+        var GetIndexBeforeId = CurrentUrl.indexOf("ge/");
 
         for (var i = 0; i < 3; i++) {
             GetIndexBeforeId++;
@@ -63,21 +63,17 @@
         var ProductId = CurrentUrl.slice(GetIndexBeforeId, 200);
 
         return ProductId;
-
     }
 
 </script>
 
-
-<div id="Confection">
+<div id="Beverage">
     <div id="ProductName"></div>
     <div id="ImageCategory"></div>
     <div id="ProductDescription">
         <div id="QuantityPerUnit">QuantityPerUnit: </div>
         <div id="UnitPrice">UnitPrice: </div>
-
     </div>
-
 </div>
 
 <input class="open_window" type="button" value="Buy" />

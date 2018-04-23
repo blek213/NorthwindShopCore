@@ -58,7 +58,6 @@ namespace NorthwindShopCore.Controllers
         {
             if (id != null)
             {
-                ViewBag.OurProductId = id;
                 return View();
             }
 
@@ -76,20 +75,25 @@ namespace NorthwindShopCore.Controllers
             return Json(JsonConfection);
         }
  
-
         [HttpGet("Beverage/{Id}")]
         public IActionResult Beverage(int? id)
         {
             if (id != null)
             {
-                var modelBeverage = DbNorthWind.Products.Where(p => p.ProductId == id);
-
-                //var JsonConfection = JsonConvert.SerializeObject(modelBeverage);
-
-                return Json(modelBeverage);
+                return View();
             }
 
             return RedirectToAction("Beverages", "Product", "api");
+        }
+
+        [HttpGet("BeverageJsonResult/{BeverageId}")]
+        public JsonResult BeverageJsonResult(int? BeverageId)
+        {
+            var modelBeverage = DbNorthWind.Products.Where(p => p.ProductId == BeverageId);
+
+            var JsonBeverage= JsonConvert.SerializeObject(modelBeverage);
+
+            return Json(JsonBeverage);
         }
 
         // POST api/values
