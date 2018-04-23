@@ -27,12 +27,6 @@ namespace NorthwindShopCore.Controllers
             return View();
         }
 
-        [HttpGet("Beverages")]
-        public IActionResult Beverages()
-        {
-            return View();
-        }
-
         [HttpPost("ConfectionsJsonResult")]
         public JsonResult ConfectionsJsonResult()
         {
@@ -41,6 +35,12 @@ namespace NorthwindShopCore.Controllers
             var JsonConfections = JsonConvert.SerializeObject(confections);
 
             return Json(JsonConfections);
+        }
+
+        [HttpGet("Beverages")]
+        public IActionResult Beverages()
+        {
+            return View();
         }
 
         [HttpPost("BeveragesJsonResult")]
@@ -52,33 +52,45 @@ namespace NorthwindShopCore.Controllers
 
             return Json(JsonBeverages);
         }
-
-
-
         // GET api/values/5
         [HttpGet("Confection/{Id}")]
         public IActionResult Confection(int? id)
         {
-            id = 2;
-        
-            if(id == null)
+            if (id != null)
             {
-                var modelConfection = DbNorthWind.Products.First(p => p.ProductId == id);
-
-                var modelCategories = DbNorthWind.Categories.First(p => p.CategoryId == modelConfection.CategoryId);
-
-                return Json(modelConfection);
+                ViewBag.OurProductId = id;
+                return View();
             }
 
             return RedirectToAction("Confections", "Product", "api");
 
         }
-        [HttpGet("")]
+
+        [HttpGet("ConfectionJsonResult/{ConfectionId}")]
+        public JsonResult ConfectionJsonResult(int? ConfectionId)
+        {
+            var modelConfection = DbNorthWind.Products.Where(p => p.ProductId == ConfectionId);
+
+            var JsonConfection = JsonConvert.SerializeObject(modelConfection);
+
+            return Json(JsonConfection);
+        }
+ 
+
+        [HttpGet("Beverage/{Id}")]
         public IActionResult Beverage(int? id)
         {
-            return View();
-        }
+            if (id != null)
+            {
+                var modelBeverage = DbNorthWind.Products.Where(p => p.ProductId == id);
 
+                //var JsonConfection = JsonConvert.SerializeObject(modelBeverage);
+
+                return Json(modelBeverage);
+            }
+
+            return RedirectToAction("Beverages", "Product", "api");
+        }
 
         // POST api/values
         [HttpPost]
@@ -87,17 +99,5 @@ namespace NorthwindShopCore.Controllers
 
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

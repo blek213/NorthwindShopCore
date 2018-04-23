@@ -2,7 +2,7 @@
     ViewData["Title"] = "Confections";
     Layout = "~/Views/_Layout.cshtml";
 }
-
+<script src="~/js/Pagination.js" type="text/javascript"></script>
 <script  type="text/javascript">
     
     setTimeout(ShowConfections, 1);
@@ -25,8 +25,7 @@
                     var firststr = '<li><a href' + '=' + "'" + "/api/Product/Confection/"+  confectionsObject[i].ProductId + "'"+ '>';
 
                     results.append(firststr + confectionsObject[i].ProductName + '</a></li>');
-                }
-                                    
+                }                              
             },
             error: function (x, y, z) {
                 alert(x + '\n' + y + '\n' + z);
@@ -40,6 +39,8 @@
 <ul type="square" id="ConfectionsList">
 
 </ul>
+
+
 
 
 
