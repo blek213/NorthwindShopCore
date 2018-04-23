@@ -58,6 +58,7 @@ namespace NorthwindShopCore.Controllers
         {
             if (id != null)
             {
+                ViewBag.IdProduct = id;
                 return View();
             }
 
@@ -80,6 +81,7 @@ namespace NorthwindShopCore.Controllers
         {
             if (id != null)
             {
+
                 return View();
             }
 
@@ -95,6 +97,8 @@ namespace NorthwindShopCore.Controllers
 
             return Json(JsonBeverage);
         }
+
+        
 
         // POST api/values
         [HttpPost]

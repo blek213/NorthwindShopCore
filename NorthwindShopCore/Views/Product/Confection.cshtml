@@ -3,6 +3,8 @@
     ViewData["Title"] = "Confection";
     Layout = "~/Views/_Layout.cshtml";
 }
+
+
 <style>
 
     #ProductName {
@@ -15,58 +17,224 @@
         padding: 15px;
     }
 
-</style>
-
-<script type="text/javascript">
-
-    var currentUrl = window.location.href;
-
-    var ConfectionIdVal=ParseIdFromUrl(currentUrl);
-
-    setTimeout(ShowConfection, 1);
-
-    function ShowConfection() {
-        $.getJSON({
-            type: 'GET',
-            dataType: 'json',
-            contentType: 'application/JSON',
-            url: '/api/Product/ConfectionJsonResult/' + ConfectionIdVal,
-            success: function (data) {
-
-                var ProductNameResult = $("#ProductName");
-
-                var ProductQuantityResult = $("#QuantityPerUnit");
-
-                var ProductUnitPrice = $("#UnitPrice");
-
-                var confectionObject = jQuery.parseJSON(data);
-           
-                ProductNameResult.append("<p>" + confectionObject[0].ProductName + "</p>");
-                ProductQuantityResult.append("<p>" + confectionObject[0].QuantityPerUnit + "</p>");
-                ProductUnitPrice.append("<p>" + confectionObject[0].UnitPrice + "</p>");
-            },
-            error: function (x, y, z) {
-                alert(x + '\n' + y + '\n' + z);
-            }
-
-        });
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.7);
+        bottom: 0;
+        cursor: default;
+        left: 0;
+        opacity: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        visibility: hidden;
+        z-index: 99999;
+        -webkit-transition: opacity .5s;
+        -moz-transition: opacity .5s;
+        -ms-transition: opacity .5s;
+        -o-transition: opacity .5s;
+        transition: opacity .5s;
     }
 
-    function ParseIdFromUrl(CurrentUrl) {
+    .popup {
+        background-color: #fff;
+        border: 3px solid #fff;
+        display: inline-block;
+        left: 50%;
+        opacity: 0;
+        padding: 15px;
+        width: 300px;
+        height: 323px;
+        position: fixed;
+        text-align: justify;
+        top: 40%;
+        visibility: hidden;
+        z-index: 999999;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        -webkit-transition: opacity .5s, top .5s;
+        -moz-transition: opacity .5s, top .5s;
+        -ms-transition: opacity .5s, top .5s;
+        -o-transition: opacity .5s, top .5s;
+        transition: opacity .5s, top .5s;
+        border-radius: 11px;
+    }
 
-        var GetIndexBeforeId = CurrentUrl.indexOf("on/");
-
-        for (var i = 0; i < 3; i++) {
-            GetIndexBeforeId++;
+        .popup .close_window {
+            width: 6px;
+            height: 17px;
+            position: absolute;
+            padding: 1px 9px 4px 9px;
+            top: -15px;
+            right: -15px;
+            cursor: pointer;
+            color: #fff;
+            font-family: 'tahoma', sans-serif;
+            background: -webkit-gradient(linear, left top, right top, from(#3d51c8), to(#051fb8));
+            background: -webkit-linear-gradient(top, #3d51c8, #051fb8);
+            background: -moz-linear-gradient(top, #3d51c8, #051fb8);
+            background: -o-linear-gradient(top, #3d51c8, #051fb8);
+            background: -ms-linear-gradient(top, #3d51c8, #051fb8);
+            background: linear-gradient(top, #3d51c8, #051fb8);
+            background-color: #3d51c8;
+            border: 1px solid #061fb8;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -o-border-radius: 50%;
+            -ms-border-radius: 50%;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.5);
         }
 
-        var ProductId = CurrentUrl.slice(GetIndexBeforeId, 200);
+            .popup .close_window:hover {
+                background: -webkit-gradient(linear, left top, right top, from(#051fb8), to(#3d51c8));
+                background: -webkit-linear-gradient(top, #051fb8, #3d51c8);
+                background: -moz-linear-gradient(top, #ff5f0, #3d51c87);
+                background: -o-linear-gradient(top, #051fb8, #3d51c8);
+                background: -ms-linear-gradient(top, #051fb8, #3d51c8);
+                background: linear-gradient(top, #051fb8, #3d51c8);
+                background-color: #051fb8;
+                border: 1px solid #00385E;
+            }
 
-        return ProductId;
+            .popup .close_window:active {
+                background: #8f9be0;
+            }
 
+    .CountProducts {
+        padding-left: 6px;
+        padding-right: 6px;
     }
 
-</script>
+    .ArthButtons {
+        background-color: #53E03F;
+        border: #53E03F;
+    }
+
+    #InputText {
+        text-align: center;
+    }
+
+    #ButtonsTwoActions {
+        padding-top: 50px;
+    }
+
+    #ContinueButtonTag {
+        padding-right: 20px;
+    }
+
+    #BuyButtonTag {
+        padding-left: 20px;
+    }
+
+    #ContinueButton, #BuyButton {
+        font-size: 20px;
+        background-color: skyblue;
+        border: 1px solid #000000;
+    }
+
+        #ContinueButton, #BuyButton:hover {
+            cursor: pointer;
+        }
+
+</style>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('.popup .close_window, .overlay').click(function () {
+                $('.popup, .overlay').css({ 'opacity': '0', 'visibility': 'hidden' });
+            });
+
+            $('input.open_window').click(function (e) {
+                $('.popup, .overlay').css({ 'opacity': '1', 'visibility': 'visible' });
+
+                e.preventDefault();
+
+                var hiddenId = $("#hiddenProductId").val(); //Get from hidden input
+
+                hiddenId = encodeURIComponent(hiddenId);
+
+                $('#ProductNameInWindow').load("http://localhost:50915/api/Values/AddToCart?IdProductFromView=" + hiddenId);
+
+            });
+
+            $('#plusButton').click(function (e) {
+
+                var getVal = $('#InputText').val();
+
+                getVal++;
+
+                $('#InputText').val(String(getVal));
+
+            });
+
+            $('#minusButton').click(function (e) {
+
+                var getVal = $('#InputText').val();
+
+                if (getVal != 1) {
+
+                    getVal--;
+
+                    $('#InputText').val(String(getVal));
+                }
+
+            });
+        });
+
+        var currentUrl = window.location.href;
+
+        var ConfectionIdVal = ParseIdFromUrl(currentUrl);
+
+        setTimeout(ShowConfection, 1);
+
+        function ShowConfection() {
+            $.getJSON({
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/JSON',
+                url: '/api/Product/ConfectionJsonResult/' + ConfectionIdVal,
+                success: function (data) {
+
+                    var ProductNameResult = $("#ProductName");
+
+                    var ProductQuantityResult = $("#QuantityPerUnit");
+
+                    var ProductUnitPrice = $("#UnitPrice");
+
+                    var confectionObject = jQuery.parseJSON(data);
+
+                    ProductNameResult.append("<p>" + confectionObject[0].ProductName + "</p>");
+                    ProductQuantityResult.append("<p>" + confectionObject[0].QuantityPerUnit + "</p>");
+                    ProductUnitPrice.append("<p>" + confectionObject[0].UnitPrice + "</p>");
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+
+            });
+        }
+
+        function ParseIdFromUrl(CurrentUrl) {
+
+            var GetIndexBeforeId = CurrentUrl.indexOf("on/");
+
+            for (var i = 0; i < 3; i++) {
+                GetIndexBeforeId++;
+            }
+
+            var ProductId = CurrentUrl.slice(GetIndexBeforeId, 200);
+
+            return ProductId;
+
+        }
+
+    </script>
 
 
 <div id="Confection">
@@ -80,4 +248,26 @@
 
 </div>
 
+<input id="hiddenProductId" type="hidden" value="@ViewBag.IdProduct" />
 <input class="open_window" type="button" value="Buy" />
+
+
+<div class="overlay" title="Shopping cart"></div>
+<div class="popup">
+    <h1 style="text-align:center;">Shopping cart</h1>
+    <ol>
+        <li><span id="ProductNameInWindow"></span> <span><input id="minusButton" class="ArthButtons" type="button" value="-" /></span><span class="CountProducts"><input name="InputText" id="InputText" type="text" value="1" size="2" maxlength="4" /></span><span><input id="plusButton" class="ArthButtons" type="button" value="+" /></span></li>
+        <div id="ButtonsTwoActions">
+            <span id="ContinueButtonTag">
+
+                <input name="button" id="ContinueButton" type="submit" value="Continue" />
+
+            </span>
+            <span id="BuyButtonTag">
+
+                <input name="button" id="BuyButton" type="submit" value="Buy" />
+
+            </span>
+        </div>
+    </ol>
+</div>
