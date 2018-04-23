@@ -10,6 +10,7 @@ using NorthwindShopCore.Models;
 using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
+using Microsoft.AspNetCore.Http;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -63,7 +64,6 @@ namespace NorthwindShopCore.Controllers
             }
 
             return RedirectToAction("Confections", "Product", "api");
-
         }
 
         [HttpGet("ConfectionJsonResult/{ConfectionId}")]
@@ -81,7 +81,6 @@ namespace NorthwindShopCore.Controllers
         {
             if (id != null)
             {
-
                 return View();
             }
 
@@ -98,13 +97,43 @@ namespace NorthwindShopCore.Controllers
             return Json(JsonBeverage);
         }
 
-        
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpGet("AddToCart")]
+        public IActionResult AddToCart(int? IdProductFromView)
         {
+            var Product = DbNorthWind.Products.First(p => p.ProductId == IdProductFromView);
 
+            return PartialView(Product);
+        }
+
+        [HttpGet("Cart")]
+        public IActionResult Cart()
+        {
+            string cookieValueFromReq = Request.Cookies["ProductName"];
+
+
+            return View();
+        }
+
+        [HttpPost("Cart")]
+        public IActionResult Cart(int? IdProductSet, int? InputText, string button)
+        {
+            var Product = DbNorthWind.Products.First(p => p.ProductId == IdProductSet);
+
+            string key = "ProductName";
+            string value = IdProductSet.ToString() + "/" + InputText.ToString();
+
+            CookieOptions option = new CookieOptions();
+
+            option.Expires = DateTime.Now.AddDays(30);
+
+            Response.Cookies.Append(key, value, option);
+
+            if (button == "Buy")
+            {
+                return RedirectToAction("BuyProduct", "Product");
+            }
+
+            return RedirectToAction("Confection", "Product", new { Id = IdProductSet });
         }
 
     }
