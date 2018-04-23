@@ -110,6 +110,32 @@ namespace NorthwindShopCore.Controllers
         {
             string cookieValueFromReq = Request.Cookies["ProductName"];
 
+            int positionStr = cookieValueFromReq.IndexOf("/");
+
+            string IdValue = "";
+
+            for (int i = 0; i < positionStr; i++)
+            {
+                IdValue += cookieValueFromReq[i];
+            }
+
+            positionStr++;
+
+            string CountValue = "";
+
+            for (int i = positionStr; i < cookieValueFromReq.Length; i++)
+            {
+                CountValue += cookieValueFromReq[i];
+            }
+
+            int ProductId = Int32.Parse(IdValue);
+
+            int Count = Int32.Parse(CountValue);
+
+            // Found our model by ProductId
+
+            var FoundModel = DbNorthWind.Products.First(p => p.ProductId == ProductId);
+
 
             return View();
         }
