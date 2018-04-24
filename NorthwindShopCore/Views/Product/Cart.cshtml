@@ -14,12 +14,12 @@
             contentType: 'application/JSON',
             url: '/api/Product/CartJsonResult',
             success: function (data) {
-
-                alert(data);
-
                 var resuts = $("#ProductList");
 
-              
+                var ProductsObject = jQuery.parseJSON(data);
+
+                resuts.append("<p>" + ProductsObject.Obj.ProductName + "  Count:" + ProductsObject.CountProducts + "</p>");
+
             },
             error: function (x, y, z) {
                 alert(x + '\n' + y + '\n' + z);
@@ -29,10 +29,16 @@
 
     }
 
-    
+
 
 </script>
 
-<div id="ProductList">
+@using (Html.BeginForm("BuyProduct", "Product", "api", FormMethod.Post))
+{
+    <div id="ProductList">
 
-</div>
+    </div>
+
+    <input type="submit" value="Buy"/>
+
+}

@@ -142,13 +142,9 @@ namespace NorthwindShopCore.Controllers
 
             var FoundModel = DbNorthWind.Products.First(p => p.ProductId == ProductId);
 
-            /*
-            var JsonResult = JsonConvert.SerializeObject(FoundModel);
+            var ProductResult = new { Obj = FoundModel, CountProducts=Count };
 
-            return Json(new { count = 2, model = FoundModel});
-            */
-
-            var JsonResult = JsonConvert.SerializeObject(FoundModel);
+            var JsonResult = JsonConvert.SerializeObject(ProductResult);
 
             return Json(JsonResult);
         }
@@ -169,10 +165,18 @@ namespace NorthwindShopCore.Controllers
 
             if (button == "Buy")
             {
-                return RedirectToAction("BuyProduct", "Product");
+                return RedirectToAction("BuyProduct", "Product","api");
             }
 
             return RedirectToAction("Confection", "Product", new { Id = IdProductSet });
+        }
+
+        [HttpGet("BuyProduct")]
+        public IActionResult BuyProduct()
+        {
+            Response.Cookies.Delete("ProductName");
+
+            return View();
         }
 
     }
