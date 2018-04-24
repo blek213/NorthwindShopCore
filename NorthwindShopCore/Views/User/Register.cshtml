@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body>
+    @using (Html.BeginForm("Register", "User", "api", FormMethod.Post))
+    {
+        <p>Name</p>
+        <input type="text" name="name" /><br /><br />
+        <p>Email</p>
+        <input type="text" name="email" /><br /><br />
+        <p>Password</p>
+        <input type="password" name="password" /><br /><br />
+        <p>Repeat password</p>
+        <input type="password" name="repeatpassword" /><br /><br />
+
+        <input type="submit" value="Register"><br /><br />
+    }
+    <hr />
+    <div><a href="/api/Values/Index">Back</a></div>
+</body>
+</html>

@@ -22,6 +22,11 @@
     <PackageReference Include="json-serialize" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.5" />

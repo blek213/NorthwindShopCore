@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SignIn</title>
+</head>
+<body>
+    @using (Html.BeginForm("SignIn", "User", "api", FormMethod.Post))
+    {
+        <p>Email</p>
+        <input type="text" name="email" /><br /><br />
+        <p>Password</p>
+        <input type="password" name="password" /><br /><br />
+
+        <input type="submit" value="SignIn" /><br /><br />
+    }
+    <hr />
+    <div><a href="/api/Values/Index">Back</a></div>
+
+
+
+</body>
+</html>

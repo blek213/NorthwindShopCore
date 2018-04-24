@@ -11,38 +11,29 @@ namespace NorthwindShopCore.Controllers
     [Route("User/[controller]")]
     public class UserController : Controller
     {
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("SignIn")]
+        public IActionResult SignIn()
         {
-            return new string[] { "value1", "value2" };
+            return View();
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpPost("SignIn")]
+        public IActionResult SignIn(string email, string password)
         {
-            return "value";
+            return RedirectToAction("Index","Values","api");
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpGet("Register")]
+        public IActionResult Register()
         {
+            return View();
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPost("Register")]
+        public IActionResult Register(string name, string email, string password, string repeatpassword )
         {
+            return View();
         }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-
 
     }
 }
