@@ -11,6 +11,7 @@ using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -148,7 +149,7 @@ namespace NorthwindShopCore.Controllers
 
             return Json(JsonResult);
         }
-
+        
         [HttpPost("Cart")]
         public IActionResult Cart(int? IdProductSet, int? InputText, string button)
         {
@@ -171,6 +172,7 @@ namespace NorthwindShopCore.Controllers
             return RedirectToAction("Confection", "Product", new { Id = IdProductSet });
         }
 
+        [Authorize(Roles = "user")]
         [HttpGet("BuyProduct")]
         public IActionResult BuyProduct()
         {

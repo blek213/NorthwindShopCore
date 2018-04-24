@@ -20,6 +20,8 @@ namespace NorthwindShopCore.Controllers
         [HttpPost("SignIn")]
         public IActionResult SignIn(string email, string password)
         {
+            //Validation
+
             return RedirectToAction("Index","Values","api");
         }
 
@@ -32,6 +34,9 @@ namespace NorthwindShopCore.Controllers
         [HttpPost("Register")]
         public IActionResult Register(string name, string email, string password, string repeatpassword )
         {
+            //Validation
+
+
             return View();
         }
 

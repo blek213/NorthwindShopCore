@@ -6,6 +6,7 @@ namespace NorthwindShopCore.Models
 {
     public partial class NORTHWNDContext : DbContext
     {
+        public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<CustomerCustomerDemo> CustomerCustomerDemo { get; set; }
