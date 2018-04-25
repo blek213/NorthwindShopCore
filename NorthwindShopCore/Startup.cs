@@ -34,7 +34,7 @@ namespace NorthwindShopCore
             services.AddDbContext<IdentityDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>()
            .AddEntityFrameworkStores<IdentityDbContext>();
 
 
@@ -42,7 +42,6 @@ namespace NorthwindShopCore
                    services.AddIdentiy<IdentityUser, IdentityRole>();
 
                 */
-
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                   .AddJwtBearer(options =>

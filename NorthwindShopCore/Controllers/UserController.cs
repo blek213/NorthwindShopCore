@@ -15,10 +15,10 @@ namespace NorthwindShopCore.Controllers
     {
         NORTHWNDContext DbNorthWind = new NORTHWNDContext();
 
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -44,16 +44,14 @@ namespace NorthwindShopCore.Controllers
 
             //Adding user
 
-            User user = new User { Email = email, UserName = name };
+            IdentityUser IdentityUser = new IdentityUser { Email = email, UserName = name };
 
-            var result = await _userManager.CreateAsync(user, password);
+            var result = await _userManager.CreateAsync(IdentityUser, password);
 
             if (result.Succeeded)
             {
                 
-              //  await _signInManager.SignInAsync(user, false);
-
-                return Json(result);
+                return RedirectToAction("Index","Values","api");
             }
 
             return Json(result);
