@@ -13,6 +13,11 @@ namespace NorthwindShopCore.Models
         {
 
         }
-
+        /*
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
+        */
     }
 }

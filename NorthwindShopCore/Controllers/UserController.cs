@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NorthwindShopCore.Models;
 
@@ -14,20 +15,22 @@ namespace NorthwindShopCore.Controllers
     {
         NORTHWNDContext DbNorthWind = new NORTHWNDContext();
 
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+        }
+
         [HttpGet("SignIn")]
         public IActionResult SignIn()
         {
             return View();
         }
 
-        [HttpPost("SignIn")]
-        public IActionResult SignIn(string email, string password)
-        {
-            //Validation
-
-            return RedirectToAction("Index","Values","api");
-        }
-
+        
         [HttpGet("Register")]
         public IActionResult Register()
         {
@@ -35,14 +38,36 @@ namespace NorthwindShopCore.Controllers
         }
 
         [HttpPost("Register")]
-        public IActionResult Register(string name, string email, string password, string repeatpassword )
+        public async Task<IActionResult> Register(string name, string email, string password, string repeatpassword)
         {
             //Validation
 
-           
+            //Adding user
 
-            return View();
+            User user = new User { Email = email, UserName = name };
+
+            var result = await _userManager.CreateAsync(user, password);
+
+            if (result.Succeeded)
+            {
+                
+              //  await _signInManager.SignInAsync(user, false);
+
+                return Json(result);
+            }
+
+            return Json(result);
         }
+
+        [HttpPost("LogOff")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogOff()
+        {
+
+            return RedirectToAction("Index", "Home", "api");
+        }
+
+
 
     }
 }

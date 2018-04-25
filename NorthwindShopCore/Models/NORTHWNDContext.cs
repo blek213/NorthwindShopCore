@@ -22,16 +22,21 @@ namespace NorthwindShopCore.Models
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*
+        public NORTHWNDContext(DbContextOptions<NORTHWNDContext> options):base(options)
         {
 
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-0BOD98G;Database=NORTHWND;Trusted_Connection=True;");
+        }
+        */
 
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-0BOD98G;Database=NORTHWND;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Categories>(entity =>
