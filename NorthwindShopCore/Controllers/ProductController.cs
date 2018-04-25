@@ -76,7 +76,7 @@ namespace NorthwindShopCore.Controllers
 
             return Json(JsonConfection);
         }
- 
+
         [HttpGet("Beverage/{Id}")]
         public IActionResult Beverage(int? id)
         {
@@ -93,7 +93,7 @@ namespace NorthwindShopCore.Controllers
         {
             var modelBeverage = DbNorthWind.Products.Where(p => p.ProductId == BeverageId);
 
-            var JsonBeverage= JsonConvert.SerializeObject(modelBeverage);
+            var JsonBeverage = JsonConvert.SerializeObject(modelBeverage);
 
             return Json(JsonBeverage);
         }
@@ -108,7 +108,7 @@ namespace NorthwindShopCore.Controllers
 
         [HttpGet("Cart")]
         public IActionResult Cart()
-        {        
+        {
             return View();
         }
 
@@ -143,13 +143,13 @@ namespace NorthwindShopCore.Controllers
 
             var FoundModel = DbNorthWind.Products.First(p => p.ProductId == ProductId);
 
-            var ProductResult = new { Obj = FoundModel, CountProducts=Count };
+            var ProductResult = new { Obj = FoundModel, CountProducts = Count };
 
             var JsonResult = JsonConvert.SerializeObject(ProductResult);
 
             return Json(JsonResult);
         }
-        
+
         [HttpPost("Cart")]
         public IActionResult Cart(int? IdProductSet, int? InputText, string button)
         {
@@ -166,7 +166,7 @@ namespace NorthwindShopCore.Controllers
 
             if (button == "Buy")
             {
-                return RedirectToAction("BuyProduct", "Product","api");
+                return RedirectToAction("BuyProduct", "Product", "api");
             }
 
             return RedirectToAction("Confection", "Product", new { Id = IdProductSet });
