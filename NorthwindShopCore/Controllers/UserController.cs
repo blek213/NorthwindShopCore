@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,18 +17,30 @@ namespace NorthwindShopCore.Controllers
         NORTHWNDContext DbNorthWind = new NORTHWNDContext();
 
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
+
         }
 
         [HttpGet("SignIn")]
         public IActionResult SignIn()
         {
             return View();
+        }
+
+        [HttpPost("SignIn")]
+        public async Task<IActionResult> SignIn(string name, string password)
+        {
+            var identity = GetIdentity(name,password);
+
+
+            return Json(identity);
         }
 
         
@@ -44,18 +57,59 @@ namespace NorthwindShopCore.Controllers
 
             //Adding user
 
-            IdentityUser IdentityUser = new IdentityUser { Email = email, UserName = name };
 
-            var result = await _userManager.CreateAsync(IdentityUser, password);
+            IdentityUser User = new IdentityUser { Email = email, UserName = name };
+
+
+            var roleUser = new IdentityRole { Name = "user" };
+
+            await _roleManager.CreateAsync(roleUser);
+
+            //IdentityResult identityResult = await _roleManager.CreateAsync(new IdentityRole("user"));
+
+            var result = await _userManager.CreateAsync(User, password);
 
             if (result.Succeeded)
             {
-                
-                return RedirectToAction("Index","Values","api");
+                var identity = GetIdentity(name, password);
+
+                if(identity == null)
+                {
+
+                    await _userManager.AddToRoleAsync(User, roleUser.Name);
+
+                    return Json(identity);
+                }
+
+                return Json(result);
             }
 
             return Json(result);
         }
+
+        private ClaimsIdentity GetIdentity(string username, string password)
+        {
+            List<IdentityUser> persons = new List<IdentityUser>();
+
+            IdentityUser user = persons.FirstOrDefault(p => p.UserName == username && p.PasswordHash == password);
+
+            if(user != null)
+            {
+                
+                //var claims = new List<Claim>
+                //{
+                //    new Claim(ClaimsIdentity.DefaultNameClaimType,user.UserName),
+                //    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.ro)
+
+                //};
+               
+                
+            }
+
+            return null;
+        }
+
+
 
         [HttpPost("LogOff")]
         [ValidateAntiForgeryToken]
