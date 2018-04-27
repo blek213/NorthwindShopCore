@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using NorthwindShopCore.Models;
@@ -23,31 +24,53 @@ namespace NorthwindShopCore.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IConfiguration _configuration;
 
-        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+
+        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _configuration = configuration;
+
 
         }
 
-        [HttpGet("SignIn")]
-        public IActionResult SignIn()
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(string name, string password)
         {
-            return View();
+            var identity = GetIdentityLogin(name, password);
+
+            if (identity == null)
+            {
+                Response.StatusCode = 400;
+                return Json(identity);
+            }
+
+            var now = DateTime.UtcNow;
+
+            // создаем JWT-токен
+            var jwt = new JwtSecurityToken(
+                    issuer: AuthOptions.ISSUER,
+                    audience: AuthOptions.AUDIENCE,
+                    notBefore: now,
+                    claims: identity.Claims,
+                    expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
+                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+            var response = new
+            {
+                access_token = encodedJwt,
+                username = identity.Name
+            };
+
+            Response.ContentType = "application/json";
+
+            return Json(Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented })));
         }
-
-        [HttpPost("SignIn")]
-        public async Task<IActionResult> SignIn(string name, string password)
-        {
-            var identity = GetIdentity(name,password);
-
-
-            return Json(identity);
-        }
-
-        
+      
         [HttpGet("Register")]
         public IActionResult Register()
         {
@@ -61,81 +84,94 @@ namespace NorthwindShopCore.Controllers
 
             //Adding user
 
-
             IdentityUser User = new IdentityUser { Email = email, UserName = name };
-
 
             var roleUser = new IdentityRole { Name = "user" };
 
             await _roleManager.CreateAsync(roleUser);
 
-            //IdentityResult identityResult = await _roleManager.CreateAsync(new IdentityRole("user"));
-
             var result = await _userManager.CreateAsync(User, password);
 
             if (result.Succeeded)
             {
-                var identity = GetIdentity(name, password);
+                var identity = GetIdentityRegister(name, password);
 
                 if(identity == null)
                 {
-
                     await _userManager.AddToRoleAsync(User, roleUser.Name);
 
-                    return Json(identity);
+                    var now = DateTime.UtcNow;
+
+                    // создаем JWT-токен
+                    var jwt = new JwtSecurityToken(
+                            issuer: AuthOptions.ISSUER,
+                            audience: AuthOptions.AUDIENCE,
+                            notBefore: now,
+                            claims: identity.Claims,
+                            expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
+                            signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+                    var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+                    var response = new
+                    {
+                        access_token = encodedJwt,
+                        username = identity.Name
+                    };
+
+                    Response.ContentType = "application/json";
+
+                    return Json(Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented })));
                 }
-
-                var now = DateTime.UtcNow;
-
-                // создаем JWT-токен
-                var jwt = new JwtSecurityToken(
-                        issuer: AuthOptions.ISSUER,
-                        audience: AuthOptions.AUDIENCE,
-                        notBefore: now,
-                        claims: identity.Claims,
-                        expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
-                        signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-                var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-
-                var response = new
-                {
-                    access_token = encodedJwt,
-                    username = identity.Name
-                };
-
-                Response.ContentType = "application/json";
-
-                await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
-
-                return Json(result);
             }
 
             return Json(result);
         }
 
-        private ClaimsIdentity GetIdentity(string username, string password)
+        private ClaimsIdentity GetIdentityLogin(string username, string password)
         {
-            List<IdentityUser> persons = new List<IdentityUser>();
+            List<IdentityUser> identityUsers = _userManager.Users.ToList();
 
-            IdentityUser user = persons.FirstOrDefault(p => p.UserName == username && p.PasswordHash == password);
+            IdentityUser user = identityUsers.FirstOrDefault(p => p.UserName == username);
 
-            if(user != null)
+            if (user != null)
             {
-                
-                //var claims = new List<Claim>
-                //{
-                //    new Claim(ClaimsIdentity.DefaultNameClaimType,user.UserName),
-                //    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.ro)
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimsIdentity.DefaultNameClaimType,username),
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType,"user")
+                };
 
-                //};
-               
-                
+                ClaimsIdentity claimsIdentity =
+              new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+                  ClaimsIdentity.DefaultRoleClaimType);
+                return claimsIdentity;
+
             }
 
             return null;
         }
 
+        private ClaimsIdentity GetIdentityRegister(string username, string password)
+        {
+            List<IdentityUser> identityUsers = _userManager.Users.ToList();
 
+            IdentityUser user = identityUsers.FirstOrDefault(p => p.UserName == username);
+
+            if (username != null)
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimsIdentity.DefaultNameClaimType,username),
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType,"user")
+                };
+
+                ClaimsIdentity claimsIdentity =
+              new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+                  ClaimsIdentity.DefaultRoleClaimType);
+                return claimsIdentity;
+            }
+            return null;
+        }
 
         [HttpPost("LogOff")]
         [ValidateAntiForgeryToken]

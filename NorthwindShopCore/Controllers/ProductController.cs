@@ -172,7 +172,7 @@ namespace NorthwindShopCore.Controllers
             return RedirectToAction("Confection", "Product", new { Id = IdProductSet });
         }
 
-        [Authorize(Roles = "user")]
+        [Authorize(Roles ="user")]
         [HttpGet("BuyProduct")]
         public IActionResult BuyProduct()
         {

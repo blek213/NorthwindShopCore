@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,10 +39,6 @@ namespace NorthwindShopCore
            .AddEntityFrameworkStores<IdentityDbContext>();
 
 
-                /*
-                   services.AddIdentiy<IdentityUser, IdentityRole>();
-
-                */
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                   .AddJwtBearer(options =>

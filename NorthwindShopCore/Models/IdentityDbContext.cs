@@ -9,10 +9,12 @@ namespace NorthwindShopCore.Models
 {
     public class IdentityDbContext: Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext<IdentityUser>
     {
+        
         public IdentityDbContext(DbContextOptions<IdentityDbContext> options):base(options)
         {
 
         }
+        
         /*
         protected override void OnModelCreating(ModelBuilder builder)
         {

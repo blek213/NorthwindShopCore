@@ -9,7 +9,7 @@ namespace NorthwindShopCore.Models
 {
     public class AuthOptions
     {
-        public const string ISSUER = "MyAuthServer";
+        public const string ISSUER = "http://localhost:50915/";
         public const string AUDIENCE = "http://localhost:50915/"; 
         const string KEY = "mysupersecret_secretkey!123";   // key for decryption
         public const int LIFETIME = 45; 
