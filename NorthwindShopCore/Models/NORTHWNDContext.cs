@@ -22,13 +22,6 @@ namespace NorthwindShopCore.Models
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
 
-        /*
-        public NORTHWNDContext(DbContextOptions<NORTHWNDContext> options):base(options)
-        {
-
-        }
-        */
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

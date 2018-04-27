@@ -34,7 +34,6 @@ namespace NorthwindShopCore.Controllers
             _roleManager = roleManager;
             _configuration = configuration;
 
-
         }
 
         [HttpPost("Login")]
