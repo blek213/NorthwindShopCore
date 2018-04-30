@@ -10,12 +10,9 @@ namespace NorthwindShopCore.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-
         public IActionResult Index()
         {
             return View();
         }
-
-
     }
 }

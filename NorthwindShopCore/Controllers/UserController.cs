@@ -132,7 +132,9 @@ namespace NorthwindShopCore.Controllers
 
             IdentityUser user = identityUsers.FirstOrDefault(p => p.UserName == username);
 
-            if (user != null)
+            var checkPassword= _userManager.CheckPasswordAsync(user, password);
+
+            if (user != null && checkPassword.Result == true)
             {
                 var claims = new List<Claim>
                 {
@@ -154,7 +156,7 @@ namespace NorthwindShopCore.Controllers
         {
             List<IdentityUser> identityUsers = _userManager.Users.ToList();
 
-            IdentityUser user = identityUsers.FirstOrDefault(p => p.UserName == username);
+            IdentityUser user = identityUsers.FirstOrDefault(p => p.UserName == username );
 
             if (username != null)
             {

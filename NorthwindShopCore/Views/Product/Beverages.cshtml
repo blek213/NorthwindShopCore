@@ -4,6 +4,15 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 
+
+<link href="~/kendo-ui/styles/kendo.common.min.css" rel="stylesheet" />
+<link href="~/kendo-ui/styles/kendo.rtl.min.css" rel="stylesheet" type="text/css" />
+<link href="~/kendo-ui/styles/kendo.default.min.css" rel="stylesheet" />
+<link href="~/kendo-ui/styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
+
+<script src="~/kendo-ui/js/jquery.js" type="text/javascript"></script>
+<script src="~/kendo-ui/js/kendo.all.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 
     setTimeout(ShowBeverages, 1);
@@ -19,14 +28,46 @@
 
                 var results = $("#BeveragesList");
 
-                var confectionsObject = jQuery.parseJSON(data);
+                var beveragesObject = jQuery.parseJSON(data);
+
+                var beveragesData = [];
+
 
                 for (var i = 0; i < data.length; i++) {
 
-                    var firststr = '<li><a href' + '=' + "'" + "/api/Product/Beverage/" + confectionsObject[i].ProductId + "'" + '>';
+                    try {
 
-                    results.append(firststr + confectionsObject[i].ProductName + '</a></li>');
+                        var ourProductVal = beveragesObject[i].ProductName;
+                        var ourProductId = beveragesObject[i].ProductId;
+
+                        beveragesData.push({
+                            "ProductId": ourProductId,
+                            "ProductName": ourProductVal
+
+                        });
+                    }
+                    catch (error) {
+
+                        break;
+                    }
                 }
+
+
+                $("#grid").kendoGrid({
+                    columns: [{ title: "Product Name", field: "ProductName", template: '<li><a href' + '=' + "'" + "/api/Product/Beverage/#:ProductId#" + "'" + '>' + '#: ProductName# ' + '</a></li>' }],
+                    dataSource: {
+                        data: beveragesData,
+                        pagesize: 6,
+                        serverPaging: false
+                    },
+                    height: 500,
+                    pageable: {
+                        refresh: true,
+                        pageSizes: true,
+                        buttonCount: 5
+                    }
+                });
+
 
             },
             error: function (x, y, z) {
@@ -39,6 +80,8 @@
 
 
 
-<ul type="square" id="BeveragesList">
+<div id="grid">
 
-</ul>
+</div>
+
+<ul type="square" id="ConfectionsList"></ul>
