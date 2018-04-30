@@ -33,12 +33,11 @@
 
 </script>
 
-@using (Html.BeginForm("BuyProduct", "Product", "api", FormMethod.Get))
-{
+<form method="get" action="/api/Product/BuyProduct" >
     <div id="ProductList">
 
     </div>
 
     <input type="submit" value="Buy"/>
 
-}
+</form>

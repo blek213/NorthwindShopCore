@@ -256,8 +256,7 @@
 <div class="popup">
     <h1 style="text-align:center;">Shopping cart</h1>
     <ol>
-        @using (Html.BeginForm("Cart", "Product", "api", FormMethod.Post))
-    {
+ <form method="post" action="/api/Product/Cart">     
         <li><span id="ProductNameInWindow"></span> <span><input id="minusButton" class="ArthButtons" type="button" value="-" /></span><span class="CountProducts"><input name="InputText" id="InputText" type="text" value="1" size="2" maxlength="4" /></span><span><input id="plusButton" class="ArthButtons" type="button" value="+" /></span></li>
         <div id="ButtonsTwoActions">
             <span id="ContinueButtonTag">
@@ -273,7 +272,7 @@
             </span>
         </div>
 
-}
+</form>
 
     </ol>
 </div>

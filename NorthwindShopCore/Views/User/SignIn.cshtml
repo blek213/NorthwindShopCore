@@ -11,15 +11,17 @@
     <title>SignIn</title>
 </head>
 <body>
-    @using (Html.BeginForm("SignIn", "User", "api", FormMethod.Post))
-    {
+
+        <form method="post" action="/api/User/SignIn">
         <p>Name</p>
         <input type="text" name="name" /><br /><br />
         <p>Password</p>
         <input type="password" name="password" /><br /><br />
 
         <input type="submit" value="SignIn" /><br /><br />
-    }
+        
+         </form>>
+
     <hr />
     <div><a href="/api/Values/Index">Back</a></div>
 
