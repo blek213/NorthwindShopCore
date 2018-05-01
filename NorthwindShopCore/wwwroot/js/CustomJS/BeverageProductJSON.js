@@ -18,12 +18,22 @@ function ShowBeverage() {
 
             var ProductUnitPrice = $("#UnitPrice");
 
+            var ProductDiscountBool = $("#DiscountBool");
+
             var beverageObject = jQuery.parseJSON(data);
 
             ProductNameResult.append("<p>" + beverageObject[0].ProductName + "</p>");
             ProductQuantityResult.append("<p>" + beverageObject[0].QuantityPerUnit + "</p>");
             ProductUnitPrice.append("<p>" + beverageObject[0].UnitPrice + "</p>");
 
+            if (beverageObject[0].Discontinued == true) {
+                ProductDiscountBool.append("<p>" + "it's discounted" + "</p>")
+            }
+            else {
+                ProductDiscountBool.append("<p>" + "it's not discounted" + "</p>")
+            }
+
+         
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);

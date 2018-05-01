@@ -18,11 +18,21 @@ function ShowConfection() {
 
             var ProductUnitPrice = $("#UnitPrice");
 
+            var ProductDiscountBool = $("#DiscountBool");
+
             var confectionObject = jQuery.parseJSON(data);
 
             ProductNameResult.append("<p>" + confectionObject[0].ProductName + "</p>");
             ProductQuantityResult.append("<p>" + confectionObject[0].QuantityPerUnit + "</p>");
             ProductUnitPrice.append("<p>" + confectionObject[0].UnitPrice + "</p>");
+
+            if (confectionObject[0].Discontinued == true) {
+                ProductDiscountBool.append("<p>" + "it's discounted" + "</p>")
+            }
+            else {
+                ProductDiscountBool.append("<p>" + "it's not discounted" + "</p>")
+            }
+
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);
