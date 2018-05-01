@@ -12,8 +12,6 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using NorthwindShopCore.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace NorthwindShopCore.Controllers
 {
     [Route("user/[controller]")]
@@ -26,14 +24,12 @@ namespace NorthwindShopCore.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IConfiguration _configuration;
 
-
         public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _configuration = configuration;
-
         }
 
         [HttpPost("Login")]
@@ -49,7 +45,6 @@ namespace NorthwindShopCore.Controllers
 
             var now = DateTime.UtcNow;
 
-            // создаем JWT-токен
             var jwt = new JwtSecurityToken(
                     issuer: AuthOptions.ISSUER,
                     audience: AuthOptions.AUDIENCE,
@@ -79,10 +74,6 @@ namespace NorthwindShopCore.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(string name, string email, string password, string repeatpassword)
         {
-            //Validation
-
-            //Adding user
-
             IdentityUser User = new IdentityUser { Email = email, UserName = name };
 
             var roleUser = new IdentityRole { Name = "user" };
@@ -101,7 +92,6 @@ namespace NorthwindShopCore.Controllers
 
                     var now = DateTime.UtcNow;
 
-                    // создаем JWT-токен
                     var jwt = new JwtSecurityToken(
                             issuer: AuthOptions.ISSUER,
                             audience: AuthOptions.AUDIENCE,
@@ -146,7 +136,6 @@ namespace NorthwindShopCore.Controllers
               new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
                   ClaimsIdentity.DefaultRoleClaimType);
                 return claimsIdentity;
-
             }
 
             return null;
@@ -178,11 +167,8 @@ namespace NorthwindShopCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {
-
             return RedirectToAction("Index", "Home", "api");
         }
-
-
 
     }
 }

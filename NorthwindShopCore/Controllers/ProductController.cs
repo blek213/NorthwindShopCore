@@ -13,8 +13,6 @@ using System.Threading;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace NorthwindShopCore.Controllers
 {
     [Route("api/[controller]")]
@@ -22,7 +20,6 @@ namespace NorthwindShopCore.Controllers
     {
         NORTHWNDContext DbNorthWind = new NORTHWNDContext();
 
-        // GET: api/values
         [HttpGet("Confections")]
         public IActionResult Confections()
         {
@@ -54,7 +51,7 @@ namespace NorthwindShopCore.Controllers
 
             return Json(JsonBeverages);
         }
-        // GET api/values/5
+
         [HttpGet("Confection/{Id}")]
         public IActionResult Confection(int? id)
         {
@@ -182,6 +179,5 @@ namespace NorthwindShopCore.Controllers
 
             return View();
         }
-
     }
 }

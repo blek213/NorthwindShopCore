@@ -32,17 +32,16 @@
 
                 var beveragesData = [];
 
-
                 for (var i = 0; i < data.length; i++) {
 
                     try {
 
-                        var ourProductVal = beveragesObject[i].ProductName;
-                        var ourProductId = beveragesObject[i].ProductId;
+                        var ProductNameVal = beveragesObject[i].ProductName;
+                        var ProductId = beveragesObject[i].ProductId;
 
                         beveragesData.push({
-                            "ProductId": ourProductId,
-                            "ProductName": ourProductVal
+                            "ProductId": ProductId,
+                            "ProductName": ProductNameVal
 
                         });
                     }
@@ -51,7 +50,6 @@
                         break;
                     }
                 }
-
 
                 $("#grid").kendoGrid({
                     columns: [{ title: "Product Name", field: "ProductName", template: '<li><a href' + '=' + "'" + "/api/Product/Beverage/#:ProductId#" + "'" + '>' + '#: ProductName# ' + '</a></li>' }],
@@ -68,7 +66,6 @@
                     }
                 });
 
-
             },
             error: function (x, y, z) {
                 alert(x + '\n' + y + '\n' + z);
@@ -77,8 +74,6 @@
 
     }
 </script>
-
-
 
 <div id="grid">
 
