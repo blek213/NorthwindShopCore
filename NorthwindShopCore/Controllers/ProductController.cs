@@ -12,6 +12,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace NorthwindShopCore.Controllers
 {
@@ -19,12 +21,17 @@ namespace NorthwindShopCore.Controllers
     public class ProductController : Controller
     {
         NORTHWNDContext DbNorthWind = new NORTHWNDContext();
-
+       
         [HttpGet("Confections")]
-        public IActionResult Confections()
+        [Produces("text/html")]
+        public HttpResponseMessage Confections()
         {
-            return View();
-        }
+            var path = "Views/Product/Confections.html";
+            var response = new HttpResponseMessage();
+            response.Content = new StringContent(System.IO.File.ReadAllText(path));
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
+            return response;
+        }    
 
         [HttpPost("ConfectionsJsonResult")]
         public JsonResult ConfectionsJsonResult()

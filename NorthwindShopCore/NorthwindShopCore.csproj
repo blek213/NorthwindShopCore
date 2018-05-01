@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Views\Values\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +35,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
@@ -52,6 +54,8 @@
     <None Include="wwwroot\css\ProductCSS.css" />
     <None Include="wwwroot\css\ValidationErrorStyle.css" />
     <None Include="wwwroot\css\WindowCSS.css" />
+    <None Include="wwwroot\html\Index.html" />
+    <None Include="wwwroot\html\IndexFooter.html" />
   </ItemGroup>
 
 </Project>
