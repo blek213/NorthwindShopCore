@@ -4,38 +4,13 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 
-<script type="text/javascript">
-    setTimeout(ShowProducts, 1);
+<script src="~/js/CustomJS/CartJSON.js" type="text/javascript"></script>
 
-    function ShowProducts() {
-        $.getJSON({
-            type: 'GET',
-            dataType: 'json',
-            contentType: 'application/JSON',
-            url: '/api/Product/CartJsonResult',
-            success: function (data) {
-                var resuts = $("#ProductList");
-
-                var ProductsObject = jQuery.parseJSON(data);
-
-                resuts.append("<p>" + ProductsObject.Obj.ProductName + "  Count:" + ProductsObject.CountProducts + "</p>");
-
-            },
-            error: function (x, y, z) {
-                alert(x + '\n' + y + '\n' + z);
-            }
-
-        });
-
-    }
-
-</script>
-
-<form method="get" action="/api/Product/BuyProduct" >
+<form method="get" action="/api/Product/BuyProduct">
     <div id="ProductList">
 
     </div>
 
-    <input type="submit" value="Buy"/>
+    <input type="submit" value="Buy" />
 
 </form>

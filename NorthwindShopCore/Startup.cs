@@ -38,28 +38,28 @@ namespace NorthwindShopCore
             services.AddIdentity<IdentityUser, IdentityRole>()
            .AddEntityFrameworkStores<IdentityDbContext>();
 
-
-
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                   .AddJwtBearer(options =>
                   {
                       options.RequireHttpsMetadata = false;
                       options.TokenValidationParameters = new TokenValidationParameters
                       {
-                          // укзывает, будет ли валидироваться издатель при валидации токена
                           ValidateIssuer = true,
                           // строка, представляющая издателя
                           ValidIssuer = AuthOptions.ISSUER,
 
                           // будет ли валидироваться потребитель токена
                           ValidateAudience = true,
+
                           // установка потребителя токена
                           ValidAudience = AuthOptions.AUDIENCE,
+
                           // будет ли валидироваться время существования
                           ValidateLifetime = true,
 
                           // установка ключа безопасности
                           IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+
                           // валидация ключа безопасности
                           ValidateIssuerSigningKey = true,
                       };
@@ -67,7 +67,6 @@ namespace NorthwindShopCore
 
             services.AddMvc();
         }
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
