@@ -12,6 +12,10 @@ function ShowBeverage() {
         url: '/api/Product/BeverageJsonResult/' + BeverageIdVal,
         success: function (data) {
 
+            var hiddenProductIdSend = $("#hiddenProductId");
+
+            var OurHiddenIdProductSet = $("#IdProductSet");
+
             var ProductNameResult = $("#ProductName");
 
             var ProductQuantityResult = $("#QuantityPerUnit");
@@ -33,7 +37,9 @@ function ShowBeverage() {
                 ProductDiscountBool.append("<p>" + "it's not discounted" + "</p>")
             }
 
-         
+            var checkAA = $("#hiddenProductId").attr("value", String(beverageObject[0].ProductId));
+            var checkBB = $("#IdProductSet").attr("value", String(beverageObject[0].ProductId));
+           
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);

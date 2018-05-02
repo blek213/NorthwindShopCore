@@ -13,7 +13,6 @@
 <script src="~/js/CustomJS/ConfectionReadyJS.js" type="text/javascript"></script>
 <script src="~/js/CustomJS/ConfectionProductJSON.js" type="text/javascript"></script>
 
-
 <div id="Confection">
     <div id="ProductName"></div>
     <div id="ImageCategory"></div>
@@ -25,9 +24,8 @@
 
 </div>
 
-<input id="hiddenProductId" type="hidden" value="@ViewBag.IdProduct" />
+<input id="hiddenProductId" name="hiddenProductId" type="hidden" value="" />
 <input class="open_window" type="button" value="Buy" />
-
 
 <div class="overlay" title="Shopping cart"></div>
 <div class="popup">
@@ -38,7 +36,7 @@
             <div id="ButtonsTwoActions">
                 <span id="ContinueButtonTag">
 
-                    <input name="IdProductSet" type="hidden" value="@ViewBag.IdProduct" />
+                    <input id="IdProductSet" name="IdProductSet" type="hidden" value="" />
                     <input name="button" id="ContinueButton" type="submit" value="Continue" />
 
                 </span>

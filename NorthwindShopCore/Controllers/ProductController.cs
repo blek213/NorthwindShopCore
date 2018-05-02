@@ -64,7 +64,6 @@ namespace NorthwindShopCore.Controllers
         {
             if (id != null)
             {
-                ViewBag.IdProduct = id;
                 return View();
             }
 
@@ -86,7 +85,7 @@ namespace NorthwindShopCore.Controllers
         {
             if (id != null)
             {
-                ViewBag.IdProduct = id;
+               
 
                 return View();
             }

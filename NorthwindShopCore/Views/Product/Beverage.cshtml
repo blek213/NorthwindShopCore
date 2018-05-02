@@ -20,8 +20,10 @@
     </div>
 </div>
 
-<input id="hiddenProductId" type="hidden" value="@ViewBag.IdProduct" />
+<div id="OpenWindowBlock">
+ <input type="hidden" id="hiddenProductId" name="hiddenProductId" />
 <input class="open_window" type="button" value="Buy" />
+</div>
 
 <div class="overlay" title="Shopping cart"></div>
 <div class="popup">
@@ -31,7 +33,7 @@
             <li><span id="ProductNameInWindow"></span> <span><input id="minusButton" class="ArthButtons" type="button" value="-" /></span><span class="CountProducts"><input name="InputText" id="InputText" type="text" value="1" size="2" maxlength="4" /></span><span><input id="plusButton" class="ArthButtons" type="button" value="+" /></span></li>
             <div id="ButtonsTwoActions">
                 <span id="ContinueButtonTag">
-                    <input name="IdProductSet" type="hidden" value="@ViewBag.IdProduct" />
+                    <input type="hidden" id="IdProductSet" name="IdProductSet" />
                     <input name="button" id="ContinueButton" type="submit" value="Continue" />
                 </span>
                 <span id="BuyButtonTag">

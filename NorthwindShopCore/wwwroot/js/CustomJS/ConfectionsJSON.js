@@ -9,7 +9,6 @@ function ShowConfections() {
         url: '/api/Product/ConfectionsJsonResult',
         success: function (data) {
 
-
             var results = $("#ConfectionsList");
 
             var confectionsObject = jQuery.parseJSON(data);

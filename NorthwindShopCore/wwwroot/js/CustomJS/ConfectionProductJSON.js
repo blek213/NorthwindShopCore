@@ -12,6 +12,10 @@ function ShowConfection() {
         url: '/api/Product/ConfectionJsonResult/' + ConfectionIdVal,
         success: function (data) {
 
+            var hiddenProductIdSend = $("#hiddenProductId");
+
+            var OurHiddenIdProductSet = $("#IdProductSet");
+
             var ProductNameResult = $("#ProductName");
 
             var ProductQuantityResult = $("#QuantityPerUnit");
