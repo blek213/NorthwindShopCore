@@ -22,16 +22,6 @@ namespace NorthwindShopCore.Controllers
     {
         NORTHWNDContext DbNorthWind = new NORTHWNDContext();
        
-        [HttpGet("Confections")]
-        [Produces("text/html")]
-        public HttpResponseMessage Confections()
-        {
-            var path = "Views/Product/Confections.html";
-            var response = new HttpResponseMessage();
-            response.Content = new StringContent(System.IO.File.ReadAllText(path));
-            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
-            return response;
-        }    
 
         [HttpPost("ConfectionsJsonResult")]
         public JsonResult ConfectionsJsonResult()
@@ -43,11 +33,6 @@ namespace NorthwindShopCore.Controllers
             return Json(JsonConfections);
         }
 
-        [HttpGet("Beverages")]
-        public IActionResult Beverages()
-        {
-            return View();
-        }
 
         [HttpPost("BeveragesJsonResult")]
         public JsonResult BeveragesJsonResult()

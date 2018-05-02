@@ -71,6 +71,13 @@ namespace NorthwindShopCore
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            /*
+            DefaultFilesOptions options = new DefaultFilesOptions();
+            options.DefaultFileNames.Clear(); // удаляем имена файлов по умолчанию
+            options.DefaultFileNames.Add("Greeting.html"); // добавляем новое имя файла
+            app.UseDefaultFiles(options); // установка параметров
+            */
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
