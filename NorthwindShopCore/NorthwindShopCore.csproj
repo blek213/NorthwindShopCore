@@ -20,7 +20,8 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="wwwroot\html\Account\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
 
   <ItemGroup>

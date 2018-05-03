@@ -60,9 +60,8 @@ namespace NorthwindShopCore.Controllers
                 username = identity.Name
             };
 
-            Response.ContentType = "application/json";
 
-            return Json(Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented })));
+            return Redirect("~/html/Values/Greeting.html");
         }
       
         [HttpGet("Register")]
@@ -107,13 +106,12 @@ namespace NorthwindShopCore.Controllers
                         username = identity.Name
                     };
 
-                    Response.ContentType = "application/json";
 
-                    return Json(Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented })));
+                    return Redirect("~/html/Values/Greeting.html");
                 }
             }
 
-            return Json(result);
+            return Redirect("~/html/Values/Greeting.html");
         }
 
         private ClaimsIdentity GetIdentityLogin(string username, string password)

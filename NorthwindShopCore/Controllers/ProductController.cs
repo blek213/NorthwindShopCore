@@ -43,7 +43,6 @@ namespace NorthwindShopCore.Controllers
             return Json(JsonConfections);
         }
 
-
         [HttpPost("BeveragesJsonResult")]
         public JsonResult BeveragesJsonResult()
         {
@@ -101,7 +100,9 @@ namespace NorthwindShopCore.Controllers
         {
             var Product = DbNorthWind.Products.First(p => p.ProductId == IdProductFromView);
 
-            return PartialView(Product);
+            var JsonProduct = JsonConvert.SerializeObject(Product);
+
+            return Json(JsonProduct);
         }
 
         [HttpGet("CartJsonResult")]
@@ -171,8 +172,7 @@ namespace NorthwindShopCore.Controllers
                 return Redirect("~/html/Product/Confection.html?ConfectionIdVal=" + IdProductSet);
             }
          
-            return Redirect("~/html/Product/Beverage.html?BeverageIdVal=" + IdProductSet);
-     
+            return Redirect("~/html/Product/Beverage.html?BeverageIdVal=" + IdProductSet);           
         }
 
         [Authorize(Roles ="user")]
