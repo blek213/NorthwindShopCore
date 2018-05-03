@@ -1,4 +1,5 @@
-﻿var currentUrl = window.location.href;
+﻿
+var currentUrl = window.location.href;
 
 var ConfectionIdVal = ParseIdFromUrl(currentUrl);
 
@@ -46,15 +47,15 @@ function ShowConfection() {
 }
 
 function ParseIdFromUrl(CurrentUrl) {
-
-    var GetIndexBeforeId = CurrentUrl.indexOf("on/");
+   
+    var GetIndexBeforeId = CurrentUrl.indexOf("al=");
 
     for (var i = 0; i < 3; i++) {
         GetIndexBeforeId++;
     }
 
     var ProductId = CurrentUrl.slice(GetIndexBeforeId, 200);
-
+   
     return ProductId;
 
 }

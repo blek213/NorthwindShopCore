@@ -31,7 +31,7 @@
         }
 
         $("#grid").kendoGrid({
-            columns: [{ title: "Product Name", field: "ProductName", template: '<li><a href' + '=' + "'" + "/api/Product/Beverage/#:ProductId#" + "'" + '>' + '#: ProductName# ' + '</a></li>' }],
+            columns: [{ title: "Product Name", field: "ProductName", template: '<li><a href' + '=' + "'" + "Beverage.html?BeverageIdVal=#:ProductId#" + "'" + '>' + '#: ProductName# ' + '</a></li>' }],
             dataSource: {
                 data: beveragesData,
                 pagesize: 6,

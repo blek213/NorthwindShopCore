@@ -32,11 +32,10 @@ function ShowConfections() {
 
                     break;
                 }
-
             }
 
             $("#grid").kendoGrid({
-                columns: [{ title: "Product Name", field: "ProductName", template: '<li><a href' + '=' + "'" + "/api/Product/Confection/#:ProductId#" + "'" + '>' + '#: ProductName# ' + '</a></li>' }],
+                columns: [{ title: "Product Name", field: "ProductName", template: '<li><a href' + '=' + "'" + "Confection.html?ConfectionIdVal=#:ProductId#" + "'" + '>' + '#: ProductName# ' + '</a></li>' }],
                 dataSource: {
                     data: confectionsData,
                     pagesize: 6,

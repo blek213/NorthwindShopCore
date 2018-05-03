@@ -50,7 +50,7 @@ function ShowBeverage() {
 
 function ParseIdFromUrl(CurrentUrl) {
 
-    var GetIndexBeforeId = CurrentUrl.indexOf("ge/");
+    var GetIndexBeforeId = CurrentUrl.indexOf("al=");
 
     for (var i = 0; i < 3; i++) {
         GetIndexBeforeId++;
