@@ -38,6 +38,9 @@ function ShowConfection() {
                 ProductDiscountBool.append("<p>" + "it's not discounted" + "</p>")
             }
 
+            var checkAA = $("#hiddenProductId").attr("value", String(confectionObject[0].ProductId));
+            var checkBB = $("#IdProductSet").attr("value", String(confectionObject[0].ProductId));
+
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);

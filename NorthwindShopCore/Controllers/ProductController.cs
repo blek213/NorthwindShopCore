@@ -14,15 +14,25 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.DotNet.PlatformAbstractions;
+using System.IO;
 
 namespace NorthwindShopCore.Controllers
 {
     [Route("api/[controller]")]
     public class ProductController : Controller
     {
-        NORTHWNDContext DbNorthWind = new NORTHWNDContext();
+        private readonly IHostingEnvironment _hostingEnvironment;
        
 
+        public ProductController(IHostingEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+        }
+
+        NORTHWNDContext DbNorthWind = new NORTHWNDContext();
+       
         [HttpPost("ConfectionsJsonResult")]
         public JsonResult ConfectionsJsonResult()
         {
@@ -70,8 +80,6 @@ namespace NorthwindShopCore.Controllers
         {
             if (id != null)
             {
-               
-
                 return View();
             }
 
@@ -96,12 +104,6 @@ namespace NorthwindShopCore.Controllers
             return PartialView(Product);
         }
 
-        [HttpGet("Cart")]
-        public IActionResult Cart()
-        {
-            return View();
-        }
-
         [HttpGet("CartJsonResult")]
         public JsonResult CartJsonResult()
         {
@@ -109,7 +111,6 @@ namespace NorthwindShopCore.Controllers
 
             if(cookieValueFromReq != null)
             {
-
                 int positionStr = cookieValueFromReq.IndexOf("/");
 
                 string IdValue = "";
@@ -165,7 +166,13 @@ namespace NorthwindShopCore.Controllers
                 return RedirectToAction("BuyProduct", "Product", "api");
             }
 
-            return RedirectToAction("Confection", "Product", new { Id = IdProductSet });
+            if(Product.CategoryId == 3)
+            {
+                return Redirect("~/html/Product/Confection.html?ConfectionIdVal=" + IdProductSet);
+            }
+         
+            return Redirect("~/html/Product/Beverage.html?BeverageIdVal=" + IdProductSet);
+     
         }
 
         [Authorize(Roles ="user")]

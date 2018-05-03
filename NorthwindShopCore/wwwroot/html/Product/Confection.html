@@ -32,40 +32,42 @@
 
         </div>
 
-        <input id="hiddenProductId" name="hiddenProductId" type="hidden" value="" />
-        <input class="open_window" type="button" value="Buy" />
-
-        <div class="overlay" title="Shopping cart"></div>
-        <div class="popup">
-            <h1 style="text-align:center;">Shopping cart</h1>
-            <ol>
-                <form method="post" action="/api/Product/Cart">
-                    <li><span id="ProductNameInWindow"></span> <span><input id="minusButton" class="ArthButtons" type="button" value="-" /></span><span class="CountProducts"><input name="InputText" id="InputText" type="text" value="1" size="2" maxlength="4" /></span><span><input id="plusButton" class="ArthButtons" type="button" value="+" /></span></li>
-                    <div id="ButtonsTwoActions">
-                        <span id="ContinueButtonTag">
-
-                            <input id="IdProductSet" name="IdProductSet" type="hidden" value="" />
-                            <input name="button" id="ContinueButton" type="submit" value="Continue" />
-
-                        </span>
-                        <span id="BuyButtonTag">
-
-                            <input name="button" id="BuyButton" type="submit" value="Buy" />
-
-                        </span>
-                    </div>
-
-                </form>
-
-            </ol>
+        <div id="OpenWindowBlock">
+            <input type="hidden" id="hiddenProductId" name="hiddenProductId" />
+            <input class="open_window" type="button" value="Buy" />
         </div>
-    </div>
 
-    <div id="fromIndexFooter">
+            <div class="overlay" title="Shopping cart"></div>
+            <div class="popup">
+                <h1 style="text-align:center;">Shopping cart</h1>
+                <ol>
+                    <form method="post" action="/api/Product/Cart">
+                        <li><span id="ProductNameInWindow"></span> <span><input id="minusButton" class="ArthButtons" type="button" value="-" /></span><span class="CountProducts"><input name="InputText" id="InputText" type="text" value="1" size="2" maxlength="4" /></span><span><input id="plusButton" class="ArthButtons" type="button" value="+" /></span></li>
+                        <div id="ButtonsTwoActions">
+                            <span id="ContinueButtonTag">
 
-    </div>
+                                <input type="hidden" id="IdProductSet" name="IdProductSet" />
+                                <input name="button" id="ContinueButton" type="submit" value="Continue" />
 
-    <script src="../../js/CustomJS/ConnectHtml.js" type="text/javascript"></script>
+                            </span>
+                            <span id="BuyButtonTag">
+
+                                <input name="button" id="BuyButton" type="submit" value="Buy" />
+
+                            </span>
+                        </div>
+
+                    </form>
+
+                </ol>
+            </div>
+        </div>
+
+        <div id="fromIndexFooter">
+
+        </div>
+
+        <script src="../../js/CustomJS/ConnectHtml.js" type="text/javascript"></script>
 
 </body>
 </html>
