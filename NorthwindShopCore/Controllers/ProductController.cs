@@ -96,7 +96,7 @@ namespace NorthwindShopCore.Controllers
         }
 
         [HttpGet("AddToCart")]
-        public IActionResult AddToCart(int? IdProductFromView)
+        public JsonResult AddToCart(int? IdProductFromView)
         {
             var Product = DbNorthWind.Products.First(p => p.ProductId == IdProductFromView);
 
