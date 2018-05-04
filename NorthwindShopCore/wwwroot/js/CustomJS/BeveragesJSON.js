@@ -34,7 +34,7 @@
             columns: [{ title: "Product Name", field: "ProductName", template: '<li><a href' + '=' + "'" + "Beverage.html?BeverageIdVal=#:ProductId#" + "'" + '>' + '#: ProductName# ' + '</a></li>' }],
             dataSource: {
                 data: beveragesData,
-                pagesize: 6,
+                pageSize: 10,
                 serverPaging: false
             },
             height: 500,

@@ -38,7 +38,7 @@ function ShowConfections() {
                 columns: [{ title: "Product Name", field: "ProductName", template: '<li><a href' + '=' + "'" + "Confection.html?ConfectionIdVal=#:ProductId#" + "'" + '>' + '#: ProductName# ' + '</a></li>' }],
                 dataSource: {
                     data: confectionsData,
-                    pagesize: 6,
+                    pageSize:10,
                     serverPaging: false
                 },
                 height: 500,

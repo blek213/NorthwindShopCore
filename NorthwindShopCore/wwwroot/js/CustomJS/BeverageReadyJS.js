@@ -13,7 +13,7 @@
 
         hiddenId = encodeURIComponent(hiddenId);
 
-        $('#ProductNameInWindow').load("http://localhost:50915/api/Product/AddToCart?IdProductFromView=" + hiddenId);
+        $('#ProductNameInWindow').load("http://localhost:50915/html/Product/AddToCart.html?IdProductFromView=" + hiddenId);
 
     });
 
