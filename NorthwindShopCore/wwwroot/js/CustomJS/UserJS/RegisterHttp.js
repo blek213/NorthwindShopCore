@@ -47,18 +47,4 @@
         });
     }
  
-
-    //$.ajax({
-    //    statusCode: {
-    //        202: function () {
-    //            window.location.href = "../Values/Greeting.html";
-
-    //        },
-    //        400: function () {
-    //            alert("Bad Request. Try to again");
-    //            window.location.href = "../User/Register.html";
-    //        }
-    //    }
-    //});
-
 });

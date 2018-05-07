@@ -6,18 +6,33 @@ function ShowProducts() {
         dataType: 'json',
         contentType: 'application/JSON',
         url: '/api/Product/CartJsonResult',
+        async: false,
         success: function (data) {
-            var resuts = $("#ProductList");
 
-            var ProductsObject = jQuery.parseJSON(data);
+            if (data != null) {
+                var resuts = $("#ProductList");
 
-            resuts.append("<p>" + ProductsObject.Obj.ProductName + "  Count:" + ProductsObject.CountProducts + "</p>");
+                var ProductsObject = jQuery.parseJSON(data);
 
-        },
-        error: function (x, y, z) {
-            alert(x + '\n' + y + '\n' + z);
+                resuts.append("<p>" + ProductsObject.Obj.ProductName + "  Count:" + ProductsObject.CountProducts + "</p>");
+            }
+
         }
-
     });
-
 }
+
+$(document).click('#BuyButton', function () {
+
+    var localValue = localStorage.getItem('UserName');
+
+    if (localValue == null) {
+       
+        window.location.href = "../User/Login.html";
+
+    }
+
+    else {
+        window.location.href = "../Product/BuyProduct.html";
+    }
+
+});

@@ -45,7 +45,6 @@ $(document).ready(function () {
 
 });
 
-
 $(document).on('submit', 'form', function () {
 
     var hiddenProductIdForModel = $("#hiddenProductId").val(); //Get from hidden input
@@ -57,8 +56,6 @@ $(document).on('submit', 'form', function () {
     var button;
 
     alert(button);
-
-    button = "Buy";
 
     setTimeout(GetResponse, 1);
 
@@ -97,8 +94,6 @@ $(document).on('submit', 'form', function () {
 
         });
     }
-
-    
 
 });
 

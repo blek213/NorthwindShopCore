@@ -17,6 +17,7 @@ using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.DotNet.PlatformAbstractions;
 using System.IO;
+using System.Net;
 
 namespace NorthwindShopCore.Controllers
 {
@@ -155,17 +156,17 @@ namespace NorthwindShopCore.Controllers
                 {
                     return Json("Beverage");
                 }
-
             }
 
             return Json("Buy");
         }
 
-     //   [Authorize(Roles ="user")]
-        [HttpGet("BuyProduct")]
-        public void BuyProduct()
+        [HttpPost("BuyProduct")]
+        public JsonResult BuyProduct()
         {
-           // Response.Cookies.Delete("ProductName");
+            Response.Cookies.Delete("ProductName");
+
+            return Json(HttpStatusCode.Accepted);
 
         }
     }
