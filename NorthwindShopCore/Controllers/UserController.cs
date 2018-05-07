@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
+using System.Security.Principal;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -32,46 +37,38 @@ namespace NorthwindShopCore.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost("Login")]
-        public async Task<IActionResult> Login(string name, string password)
+        [HttpPost("SwapRab")]
+        public JsonResult SwapRab()
         {
-            var identity = GetIdentityLogin(name, password);
+            return Json("202");
+        }
 
-            if (identity == null)
+        [HttpPost("Login")]
+        public JsonResult Login(string name, string password)
+        {
+            var identity =  GetIdentityLogin(name, password);
+
+            if(identity != null)
             {
-                Response.StatusCode = 400;
-                return Json(identity);
+                var now = DateTime.UtcNow;
+
+                var jwt = new JwtSecurityToken(
+                        issuer: AuthOptions.ISSUER,
+                        audience: AuthOptions.AUDIENCE,
+                        notBefore: now,
+                        claims: identity.Claims,
+                        expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
+                        signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+                var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+                return Json(HttpStatusCode.Accepted);
             }
 
-            var now = DateTime.UtcNow;
-
-            var jwt = new JwtSecurityToken(
-                    issuer: AuthOptions.ISSUER,
-                    audience: AuthOptions.AUDIENCE,
-                    notBefore: now,
-                    claims: identity.Claims,
-                    expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
-                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-
-            var response = new
-            {
-                access_token = encodedJwt,
-                username = identity.Name
-            };
-
-
-            return Redirect("~/html/Values/Greeting.html");
-        }
-      
-        [HttpGet("Register")]
-        public IActionResult Register()
-        {
-            return View();
+               return Json(HttpStatusCode.BadRequest);
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Register(string name, string email, string password, string repeatpassword)
+        public async Task<JsonResult> Register(string name, string email, string password, string repeatpassword)
         {
             IdentityUser User = new IdentityUser { Email = email, UserName = name };
 
@@ -79,13 +76,13 @@ namespace NorthwindShopCore.Controllers
 
             await _roleManager.CreateAsync(roleUser);
 
-            var result = await _userManager.CreateAsync(User, password);
+            var result =  _userManager.CreateAsync(User, password);
 
-            if (result.Succeeded)
+            if (result != null)
             {
                 var identity = GetIdentityRegister(name, password);
 
-                if(identity == null)
+                if (identity == null)
                 {
                     await _userManager.AddToRoleAsync(User, roleUser.Name);
 
@@ -100,25 +97,19 @@ namespace NorthwindShopCore.Controllers
                             signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
                     var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-                    var response = new
-                    {
-                        access_token = encodedJwt,
-                        username = identity.Name
-                    };
+                    return Json(HttpStatusCode.Accepted);
 
-
-                    return Redirect("~/html/Values/Greeting.html");
                 }
             }
-
-            return Redirect("~/html/Values/Greeting.html");
+            
+            return Json(HttpStatusCode.BadRequest);
         }
 
-        private ClaimsIdentity GetIdentityLogin(string username, string password)
+        private ClaimsIdentity GetIdentityLogin(string name, string password)
         {
             List<IdentityUser> identityUsers = _userManager.Users.ToList();
 
-            IdentityUser user = identityUsers.FirstOrDefault(p => p.UserName == username);
+            IdentityUser user = identityUsers.FirstOrDefault(p => p.UserName == name);
 
             var checkPassword= _userManager.CheckPasswordAsync(user, password);
 
@@ -126,17 +117,19 @@ namespace NorthwindShopCore.Controllers
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType,username),
+                    new Claim(ClaimsIdentity.DefaultNameClaimType,name),
                     new Claim(ClaimsIdentity.DefaultRoleClaimType,"user")
                 };
 
                 ClaimsIdentity claimsIdentity =
               new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
                   ClaimsIdentity.DefaultRoleClaimType);
+
                 return claimsIdentity;
             }
 
             return null;
+
         }
 
         private ClaimsIdentity GetIdentityRegister(string username, string password)
@@ -145,7 +138,8 @@ namespace NorthwindShopCore.Controllers
 
             IdentityUser user = identityUsers.FirstOrDefault(p => p.UserName == username );
 
-            if (username != null)
+
+            if (user != null)
             {
                 var claims = new List<Claim>
                 {
@@ -158,14 +152,27 @@ namespace NorthwindShopCore.Controllers
                   ClaimsIdentity.DefaultRoleClaimType);
                 return claimsIdentity;
             }
+
             return null;
         }
+        /*
+        [HttpGet("IsAuth")]
+        public JsonResult IsAuth()
+        {
+          //  bool isAuthenticated = User.Identity.IsAuthenticated;
+
+            var userCheck = _signInManager.IsSignedIn(User);
+
+         //   var userExternal = HttpContext.GetTokenAsync(IdentityConstants.ExternalScheme, "Token");
+
+            return Json(userCheck);
+        }
+        */
 
         [HttpPost("LogOff")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {
-            return RedirectToAction("Index", "Home", "api");
+            return Redirect("~/html/Values/Greeting.html");
         }
 
     }

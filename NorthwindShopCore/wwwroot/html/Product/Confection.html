@@ -40,24 +40,25 @@
             <div class="popup">
                 <h1 style="text-align:center;">Shopping cart</h1>
                 <ol>
-                    <form method="post" action="/api/Product/Cart">
-                        <li><span id="ProductNameInWindow"></span> <span><input id="minusButton" class="ArthButtons" type="button" value="-" /></span><span class="CountProducts"><input name="InputText" id="InputText" type="text" value="1" size="2" maxlength="4" /></span><span><input id="plusButton" class="ArthButtons" type="button" value="+" /></span></li>
-                        <div id="ButtonsTwoActions">
-                            <span id="ContinueButtonTag">
+                    <form>
+                    <!--- <form method="post" action="/api/Product/Cart"> -->
+                    <li><span id="ProductNameInWindow"></span> <span><input id="minusButton" class="ArthButtons" type="button" value="-" /></span><span class="CountProducts"><input name="InputText" id="InputText" type="text" value="1" size="2" maxlength="4" /></span><span><input id="plusButton" class="ArthButtons" type="button" value="+" /></span></li>
+                    <div id="ButtonsTwoActions">
+                        <span id="ContinueButtonTag">
 
-                                <input type="hidden" id="IdProductSet" name="IdProductSet" />
-                                <input name="button" id="ContinueButton" type="submit" value="Continue" />
+                            <input type="hidden" id="IdProductSet" name="IdProductSet" />
+                            <input name="button" id="ContinueButton" type="submit" value="Continue" />
 
-                            </span>
-                            <span id="BuyButtonTag">
+                        </span>
+                        <span id="BuyButtonTag">
 
-                                <input name="button" id="BuyButton" type="submit" value="Buy" />
+                            <input name="button" id="BuyButton" type="submit" value="Buy" />
 
-                            </span>
-                        </div>
+                        </span>
+                    </div>
 
-                    </form>
-
+                    <!-- </form>-->
+                </form>
                 </ol>
             </div>
         </div>

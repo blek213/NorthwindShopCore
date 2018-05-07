@@ -3,24 +3,28 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <script src="../../kendo-ui/js/jquery.js"></script>
+
 </head>
 <body>
 
-    <form method="post" action="/user/User/Register">
+    <form>
         <p>Name</p>
-        <input type="text" name="name" /><br /><br />
+        <input id="name" type="text" name="name" /><br /><br />
         <p>Email</p>
-        <input type="text" name="email" /><br /><br />
+        <input id="email" type="text" name="email" /><br /><br />
         <p>Password</p>
-        <input type="password" name="password" /><br /><br />
+        <input id="password" type="password" name="password" /><br /><br />
         <p>Repeat password</p>
-        <input type="password" name="repeatpassword" /><br /><br />
+        <input id="repeatpassword" type="password" name="repeatpassword" /><br /><br />
         <input type="submit" value="Register"><br /><br />
     </form>
 
     <p><a href="Login.html">SignIn</a></p>
     <hr />
     <div><a href="../Values/Greeting.html">Back</a></div>
+
+    <script src="../../js/CustomJS/UserJS/RegisterHttp.js" type="text/javascript"></script>
 
 </body>
 </html>

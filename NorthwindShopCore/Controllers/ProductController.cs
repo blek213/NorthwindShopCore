@@ -53,16 +53,6 @@ namespace NorthwindShopCore.Controllers
             return Json(JsonBeverages);
         }
 
-        [HttpGet("Confection/{Id}")]
-        public IActionResult Confection(int? id)
-        {
-            if (id != null)
-            {
-                return View();
-            }
-
-            return RedirectToAction("Confections", "Product", "api");
-        }
 
         [HttpGet("ConfectionJsonResult/{ConfectionId}")]
         public JsonResult ConfectionJsonResult(int? ConfectionId)
@@ -74,16 +64,6 @@ namespace NorthwindShopCore.Controllers
             return Json(JsonConfection);
         }
 
-        [HttpGet("Beverage/{Id}")]
-        public IActionResult Beverage(int? id)
-        {
-            if (id != null)
-            {
-                return View();
-            }
-
-            return RedirectToAction("Beverages", "Product", "api");
-        }
 
         [HttpGet("BeverageJsonResult/{BeverageId}")]
         public JsonResult BeverageJsonResult(int? BeverageId)
@@ -149,7 +129,7 @@ namespace NorthwindShopCore.Controllers
         }
 
         [HttpPost("Cart")]
-        public IActionResult Cart(int? IdProductSet, int? InputText, string button)
+        public JsonResult Cart(int? IdProductSet, int? InputText, string button)
         {
             var Product = DbNorthWind.Products.First(p => p.ProductId == IdProductSet);
 
@@ -164,24 +144,26 @@ namespace NorthwindShopCore.Controllers
 
             if (button == "Buy")
             {
-                return RedirectToAction("BuyProduct", "Product", "api");
+                //  return RedirectToAction("BuyProduct", "Product", "api");
+                return Json("Buy");
             }
 
             if(Product.CategoryId == 3)
             {
-                return Redirect("~/html/Product/Confection.html?ConfectionIdVal=" + IdProductSet);
+                //   return Redirect("~/html/Product/Confection.html?ConfectionIdVal=" + IdProductSet);
+                return Json("Confection");
             }
-         
-            return Redirect("~/html/Product/Beverage.html?BeverageIdVal=" + IdProductSet);           
+
+            //   return Redirect("~/html/Product/Beverage.html?BeverageIdVal=" + IdProductSet);        
+            return Json("AnotherOne");
         }
 
-        [Authorize(Roles ="user")]
+     //   [Authorize(Roles ="user")]
         [HttpGet("BuyProduct")]
-        public IActionResult BuyProduct()
+        public void BuyProduct()
         {
-            Response.Cookies.Delete("ProductName");
+           // Response.Cookies.Delete("ProductName");
 
-            return View();
         }
     }
 }
