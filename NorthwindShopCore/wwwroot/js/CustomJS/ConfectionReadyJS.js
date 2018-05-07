@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
 
     $('.popup .close_window, .overlay').click(function () {
         $('.popup, .overlay').css({ 'opacity': '0', 'visibility': 'hidden' });
@@ -45,7 +46,6 @@
 });
 
 
-
 $(document).on('submit', 'form', function () {
 
     var hiddenProductIdForModel = $("#hiddenProductId").val(); //Get from hidden input
@@ -54,37 +54,51 @@ $(document).on('submit', 'form', function () {
 
     var InputText = $("#InputText").val();
 
-    var button = $("input[name='button']").val();
+    var button;
 
-    $.getJSON({
-        type: 'POST',
-        dataType: 'json',
-        contentType: 'application/JSON',
-        url: '/api/Product/Cart?IdProductSet=' + hiddenProductIdForModel + "&InputText=" + InputText +"&button="+ button,
-        success: function (data) {
+    alert(button);
 
-            alert(data);
+    button = "Buy";
 
-            if (data == "Buy") {
+    setTimeout(GetResponse, 1);
 
-                window.location.href = "../Values/Greeting.html";
+    function GetResponse() {
+        $.getJSON({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/JSON',
+            url: '/api/Product/Cart?IdProductSet=' + hiddenProductIdForModel + "&InputText=" + InputText + "&button=" + button,
+            async: false,
+            success: function (data) {
 
+                alert(data);
+
+                if (data == "Confection") {
+
+                    window.location.href = "../Product/Confection.html?ConfectionIdVal=" + hiddenProductIdForModel;
+                }
+
+                if (data == "Buy") {
+
+                    var localValue = localStorage.getItem('UserName');
+
+                    if (localValue == null) {
+                        window.location.href = "../User/Login.html";
+                    }
+                    else {
+                        window.location.href = "../Product/BuyProduct.html";
+                    }
+
+                }
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
             }
 
-            if (data == 202) {
+        });
+    }
 
-                localStorage.setItem('UserName', UserNameForm);
-
-                window.location.href = "../Values/Greeting.html";
-
-            }
-           
-        },
-        error: function (x, y, z) {
-            alert(x + '\n' + y + '\n' + z);
-        }
-
-    });
+    
 
 });
 

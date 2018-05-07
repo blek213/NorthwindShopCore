@@ -17,15 +17,14 @@
             dataType: 'json',
             contentType: 'application/JSON',
             url: '/user/User/Register?name=' + name + "&email=" + email + "&password=" + password + "&repeatpassword=" + repeatpassword,
+            async: false,
             success: function (data) {
-
-                var UserNameForm = $("#name").val();
 
                 alert(data);
 
                 if (data == 202) {
 
-                    localStorage.setItem('UserName', UserNameForm);
+                    localStorage.setItem('UserName', name);
 
                     alert("Welcome to our shop!");
 
@@ -41,7 +40,8 @@
 
             },
             error: function (x, y, z) {
-                alert(x + '\n' + y + '\n' + z);
+                alert("Bad request")
+                window.location.href = "Register.html";
             }
 
         });

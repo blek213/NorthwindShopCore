@@ -155,6 +155,7 @@ namespace NorthwindShopCore.Controllers
 
             return null;
         }
+
         /*
         [HttpGet("IsAuth")]
         public JsonResult IsAuth()

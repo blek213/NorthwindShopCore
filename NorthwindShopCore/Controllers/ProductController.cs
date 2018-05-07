@@ -142,20 +142,23 @@ namespace NorthwindShopCore.Controllers
 
             Response.Cookies.Append(key, value, option);
 
-            if (button == "Buy")
+                       
+           if(button == "Continue")
             {
-                //  return RedirectToAction("BuyProduct", "Product", "api");
-                return Json("Buy");
+                if (Product.CategoryId == 3)
+                {
+                    //   return Redirect("~/html/Product/Confection.html?ConfectionIdVal=" + IdProductSet);
+                    return Json("Confection");
+                }
+
+                if (Product.CategoryId == 1)
+                {
+                    return Json("Beverage");
+                }
+
             }
 
-            if(Product.CategoryId == 3)
-            {
-                //   return Redirect("~/html/Product/Confection.html?ConfectionIdVal=" + IdProductSet);
-                return Json("Confection");
-            }
-
-            //   return Redirect("~/html/Product/Beverage.html?BeverageIdVal=" + IdProductSet);        
-            return Json("AnotherOne");
+            return Json("Buy");
         }
 
      //   [Authorize(Roles ="user")]

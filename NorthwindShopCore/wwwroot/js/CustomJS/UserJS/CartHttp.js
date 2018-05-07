@@ -1,9 +1,14 @@
 ﻿$(document).on('submit', 'form', function () {
+
+    var IdProductSet = $("#IdProductSet").val();
+    var InputText = $("#InputText").val();
+    var button = $("name='button'").val();
+
     $.getJSON({
         type: 'POST',
         dataType: 'json',
         contentType: 'application/JSON',
-        url: '/user/User/Login',
+        url: '/user/User/Register?IdProductSet=' + IdProductSet + "&InputText=" + InputText + "&button=" + button,
         success: function (data) {
 
             var UserNameForm = $("#name").val();
