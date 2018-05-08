@@ -26,7 +26,6 @@ namespace NorthwindShopCore.Controllers
     {
         private readonly IHostingEnvironment _hostingEnvironment;
        
-
         public ProductController(IHostingEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
@@ -54,7 +53,6 @@ namespace NorthwindShopCore.Controllers
             return Json(JsonBeverages);
         }
 
-
         [HttpGet("ConfectionJsonResult/{ConfectionId}")]
         public JsonResult ConfectionJsonResult(int? ConfectionId)
         {
@@ -64,7 +62,6 @@ namespace NorthwindShopCore.Controllers
 
             return Json(JsonConfection);
         }
-
 
         [HttpGet("BeverageJsonResult/{BeverageId}")]
         public JsonResult BeverageJsonResult(int? BeverageId)
@@ -142,9 +139,8 @@ namespace NorthwindShopCore.Controllers
             option.Expires = DateTime.Now.AddDays(30);
 
             Response.Cookies.Append(key, value, option);
-
-                       
-           if(button == "Continue")
+                 
+            if(button == "Continue")
             {
                 if (Product.CategoryId == 3)
                 {

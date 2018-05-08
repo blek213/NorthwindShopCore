@@ -4,6 +4,9 @@
     var InputText = $("#InputText").val();
     var button = $("name='button'").val();
 
+
+    alert(button);
+
     $.getJSON({
         type: 'POST',
         dataType: 'json',
