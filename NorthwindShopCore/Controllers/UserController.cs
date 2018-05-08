@@ -74,7 +74,7 @@ namespace NorthwindShopCore.Controllers
 
             var roleUser = new IdentityRole { Name = "user" };
 
-            await _roleManager.CreateAsync(roleUser);
+             await _roleManager.CreateAsync(roleUser);
 
             var result =  _userManager.CreateAsync(User, password);
 
@@ -84,9 +84,11 @@ namespace NorthwindShopCore.Controllers
 
                 if (identity == null)
                 {
-                    await _userManager.AddToRoleAsync(User, roleUser.Name);
+                     _userManager.AddToRoleAsync(User, roleUser.Name);
 
                     var now = DateTime.UtcNow;
+
+                    identity = SendClaimsInRegister(name);
 
                     var jwt = new JwtSecurityToken(
                             issuer: AuthOptions.ISSUER,
@@ -155,6 +157,20 @@ namespace NorthwindShopCore.Controllers
 
             return null;
         }
+
+        public ClaimsIdentity SendClaimsInRegister(string username)
+        {
+            var claims = new List<Claim>
+                {
+                    new Claim(ClaimsIdentity.DefaultNameClaimType,username),
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType,"user")
+                };
+
+            ClaimsIdentity claimsIdentity =
+          new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+              ClaimsIdentity.DefaultRoleClaimType);
+            return claimsIdentity;
+        } 
 
         /*
         [HttpGet("IsAuth")]

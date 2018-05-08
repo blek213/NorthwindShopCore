@@ -39,8 +39,9 @@
                 }
 
             },
-            error: function (x, y, z) {
+            error: function (message) {
                 alert("Bad request")
+                alert(message);
                 window.location.href = "Register.html";
             }
 

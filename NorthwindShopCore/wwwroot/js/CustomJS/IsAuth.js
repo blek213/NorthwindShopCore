@@ -32,7 +32,6 @@ function LogOffFunc() {
 
             window.location.href = "../Values/Greeting.html";
 
-
         },
         error: function (x, y, z) {
             alert("Sorry, troubles in server.");
