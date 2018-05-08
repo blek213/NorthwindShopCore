@@ -83,7 +83,6 @@ function ContinueButtonFunc() {
         }
 
     });
-
 };
 
 function BuyButtonFunc() {

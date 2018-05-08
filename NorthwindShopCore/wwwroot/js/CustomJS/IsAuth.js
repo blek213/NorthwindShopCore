@@ -12,8 +12,31 @@ function ShowLink() {
 
     }
     else {
-        $('#userLayout').prepend('<input type="submit" value="logOff" />');
+        $('#userLayout').prepend('<input id="logOff" type="button" value="logOff" onclick="return LogOffFunc();" />');
 
     }
-    
+
 }
+
+function LogOffFunc() {
+
+    $.getJSON({
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/JSON',
+        url: '/user/User/LogOff',
+        async: false,
+        success: function (data) {
+
+            delete localStorage["UserName"];
+
+            window.location.href = "../Values/Greeting.html";
+
+
+        },
+        error: function (x, y, z) {
+            alert("Sorry, troubles in server.");
+        }
+
+    });
+};

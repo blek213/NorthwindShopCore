@@ -171,9 +171,11 @@ namespace NorthwindShopCore.Controllers
         */
 
         [HttpPost("LogOff")]
-        public async Task<IActionResult> LogOff()
+        public JsonResult LogOff()
         {
-            return Redirect("~/html/Values/Greeting.html");
+             HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            return Json(HttpStatusCode.Accepted);
         }
 
     }
