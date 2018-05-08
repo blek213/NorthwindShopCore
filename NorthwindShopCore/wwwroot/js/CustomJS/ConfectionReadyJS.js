@@ -91,6 +91,7 @@ function ContinueButtonFunc() {
 
 
 function BuyButtonFunc() {
+
     var hiddenProductIdForModel = $("#hiddenProductId").val(); //Get from hidden input
 
     hiddenProductIdForModel = encodeURIComponent(hiddenProductIdForModel);
@@ -98,8 +99,6 @@ function BuyButtonFunc() {
     var InputText = $("#InputText").val();
 
     var button = "Buy";
-
-    //setTimeout(GetResponse, 1);
 
     $.getJSON({
         type: 'POST',
@@ -121,6 +120,7 @@ function BuyButtonFunc() {
                 if (localValue == null) {
                     window.location.href = "../User/Login.html";
                 }
+
                 else {
                     window.location.href = "../Product/BuyProduct.html";
                 }

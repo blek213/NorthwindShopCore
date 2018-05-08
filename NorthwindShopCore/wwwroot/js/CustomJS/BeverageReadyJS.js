@@ -40,3 +40,91 @@
 
     });
 });
+
+function ContinueButtonFunc() {
+
+    var hiddenProductIdForModel = $("#hiddenProductId").val(); //Get from hidden input
+
+    hiddenProductIdForModel = encodeURIComponent(hiddenProductIdForModel);
+
+    var InputText = $("#InputText").val();
+
+    var button = "Continue";
+
+
+    $.getJSON({
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/JSON',
+        url: '/api/Product/Cart?IdProductSet=' + hiddenProductIdForModel + "&InputText=" + InputText + "&button=" + button,
+        async: false,
+        success: function (data) {
+
+            if (data == "Confection") {
+
+                window.location.href = "../Product/Beverage.html?BeverageIdVal=" + hiddenProductIdForModel;
+            }
+
+            if (data == "Buy") {
+
+                var localValue = localStorage.getItem('UserName');
+
+                if (localValue == null) {
+                    window.location.href = "../User/Login.html";
+                }
+                else {
+                    window.location.href = "../Product/BuyProduct.html";
+                }
+
+            }
+        },
+        error: function (x, y, z) {
+            alert(x + '\n' + y + '\n' + z);
+        }
+
+    });
+
+};
+
+function BuyButtonFunc() {
+    var hiddenProductIdForModel = $("#hiddenProductId").val(); //Get from hidden input
+
+    hiddenProductIdForModel = encodeURIComponent(hiddenProductIdForModel);
+
+    var InputText = $("#InputText").val();
+
+    var button = "Buy";
+
+    $.getJSON({
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/JSON',
+        url: '/api/Product/Cart?IdProductSet=' + hiddenProductIdForModel + "&InputText=" + InputText + "&button=" + button,
+        async: false,
+        success: function (data) {
+
+            if (data == "Confection") {
+
+                window.location.href = "../Product/Beverage.html?BeverageIdVal=" + hiddenProductIdForModel;
+            }
+
+            if (data == "Buy") {
+
+                var localValue = localStorage.getItem('UserName');
+
+                if (localValue == null) {
+                    window.location.href = "../User/Login.html";
+                }
+
+                else {
+                    window.location.href = "../Product/BuyProduct.html";
+                }
+
+            }
+        },
+        error: function (x, y, z) {
+            alert(x + '\n' + y + '\n' + z);
+        }
+
+    });
+}
