@@ -11,6 +11,10 @@ function ShowConfections() {
 
             var results = $("#ConfectionsList");
 
+            /*
+            alert(data[0].ProductName);
+            alert(data.ProductName);
+            */
             var confectionsObject = jQuery.parseJSON(data);
 
             var confectionsData = [];

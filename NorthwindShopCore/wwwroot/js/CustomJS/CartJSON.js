@@ -14,7 +14,17 @@ function ShowProducts() {
 
                 var ProductsObject = jQuery.parseJSON(data);
 
-                resuts.append("<p>" + ProductsObject.Obj.ProductName + "  Count:" + ProductsObject.CountProducts + "</p>");
+                var discountOrNot;
+
+                if (ProductsObject.Obj.Discontinued == true) {
+                    discountOrNot = "It's discontinued";
+
+                }
+                else {
+                    discountOrNot = "It's not discontinued";
+                }
+                 
+                resuts.append("<p style='text-align:center;'>" + ProductsObject.Obj.ProductName +"</p>"+ "<p>"+ "<b> QuantityPerUnit: </b> " + ProductsObject.Obj.QuantityPerUnit + "<b> UnitPrice: </b>" + ProductsObject.Obj.UnitPrice + "<b> Discount: </b>" + discountOrNot +"<b><i> | Count:" + ProductsObject.CountProducts +" |</b></i>" +  "</p>");
             }
 
         }

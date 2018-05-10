@@ -60,7 +60,7 @@ function ContinueButtonFunc() {
         async: false,
         success: function (data) {
 
-            if (data == "Confection") {
+            if (data == "Beverage") {
 
                 window.location.href = "../Product/Beverage.html?BeverageIdVal=" + hiddenProductIdForModel;
             }
