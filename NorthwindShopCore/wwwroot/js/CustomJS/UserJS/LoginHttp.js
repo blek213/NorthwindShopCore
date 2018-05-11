@@ -27,14 +27,14 @@
 
                     swal("Success", "You are in system", "success");
 
-                    setTimeout(RedirectToMain, 3000);
+                    setTimeout(RedirectToMain, 1000);
 
                 }
                 else if (data == 400) {
 
                     swal("Error", "Typed incorrected data", "error");
 
-                    setTimeout(RedirecttoLogin, 3000);
+                    setTimeout(RedirecttoLogin, 1500);
                 }
             },
             error: function (x, y, z) {

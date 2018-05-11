@@ -1,4 +1,5 @@
-﻿$(document).on('submit', 'form', function () {
+﻿
+function RegisterFunc() {
 
     var name = $("#name").val();
     var email = $("#email").val();
@@ -20,32 +21,40 @@
             async: false,
             success: function (data) {
 
-                alert(data);
-
                 if (data == 202) {
 
                     localStorage.setItem('UserName', name);
 
-                    alert("Welcome to our shop!");
+                    swal("Success", "Welcome to our shop!", "success");
 
-                    window.location.href = "../Values/Greeting.html";
+                    setTimeout(RedirecttoRegister,1500);
 
                 }
                 else if (data == 400) {
 
-                    alert("You typed incorrect data ");
+                    swal("Error", "Typed incorrected data or IIS 500 error", "error");
+                    setTimeout(RedirectToMain, 1000);
 
-                    window.location.href = "Register.html";
                 }
 
             },
             error: function (message) {
-                alert("Bad request")
-                alert(message);
-                window.location.href = "Register.html";
+                swal("Error", "Typed incorrected data or IIS 500 error", "error");
+
+                setTimeout(RedirecttoRegister, 1500);
             }
 
         });
     }
  
-});
+}
+
+function RedirecttoRegister() {
+    window.location.href = "Register.html";
+
+}
+
+function RedirectToMain() {
+    window.location.href = "../Values/Greeting.html";
+
+}
