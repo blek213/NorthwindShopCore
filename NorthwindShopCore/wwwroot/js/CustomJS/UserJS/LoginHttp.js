@@ -1,4 +1,6 @@
-﻿$(document).on('submit', 'form', function () {
+﻿
+
+ function SignInFunc(){
 
     var name = $("#name").val();
     var password = $("#password").val();
@@ -17,28 +19,44 @@
             success: function (data) {
 
                 if (data == 202) {
-
+                    /*
+                    // сохраняем в хранилище sessionStorage токен доступа
+                    sessionStorage.setItem(tokenKey, data.access_token);
+                    */
                     localStorage.setItem('UserName', name);
 
-                    alert("You are in system");
+                    swal("Success", "You are in system", "success");
 
-                    window.location.href = "../Values/Greeting.html";
+                    setTimeout(RedirectToMain, 3000);
 
                 }
                 else if (data == 400) {
 
-                    alert("You typed incorrect data ");
+                    swal("Error", "Typed incorrected data", "error");
 
-                    window.location.href = "Login.html";
+                    setTimeout(RedirecttoLogin, 3000);
                 }
-       
             },
             error: function (x, y, z) {
-                alert("Bad request")
+
+                swal({
+                    icon: "error",
+                    text: "Bad request",
+                });
                 window.location.href = "Login.html";
             }
         });
     }
 
    
-});
+}
+
+function RedirecttoLogin() {
+    window.location.href = "Login.html";
+
+}
+
+function RedirectToMain() {
+    window.location.href = "../Values/Greeting.html";
+
+}

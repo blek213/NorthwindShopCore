@@ -13,6 +13,73 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bin\popper.js\**" />
+    <Compile Remove="wwwroot\bootstrap\dist\fonts\**" />
+    <Compile Remove="wwwroot\bootstrap\dist\js\**" />
+    <Compile Remove="wwwroot\bootstrap\fonts\**" />
+    <Compile Remove="wwwroot\bootstrap\grunt\**" />
+    <Compile Remove="wwwroot\bootstrap\js\**" />
+    <Compile Remove="wwwroot\bootstrap\less\**" />
+    <Compile Remove="wwwroot\bootstrap\nuget\**" />
+    <Compile Remove="wwwroot\css\bootstrap\dist\fonts\**" />
+    <Compile Remove="wwwroot\css\bootstrap\dist\js\**" />
+    <Compile Remove="wwwroot\css\bootstrap\fonts\**" />
+    <Compile Remove="wwwroot\css\bootstrap\grunt\**" />
+    <Compile Remove="wwwroot\css\bootstrap\js\**" />
+    <Compile Remove="wwwroot\css\bootstrap\less\**" />
+    <Compile Remove="wwwroot\css\bootstrap\nuget\**" />
+    <Compile Remove="wwwroot\popper.js\**" />
+    <Content Remove="bin\popper.js\**" />
+    <Content Remove="wwwroot\bootstrap\dist\fonts\**" />
+    <Content Remove="wwwroot\bootstrap\dist\js\**" />
+    <Content Remove="wwwroot\bootstrap\fonts\**" />
+    <Content Remove="wwwroot\bootstrap\grunt\**" />
+    <Content Remove="wwwroot\bootstrap\js\**" />
+    <Content Remove="wwwroot\bootstrap\less\**" />
+    <Content Remove="wwwroot\bootstrap\nuget\**" />
+    <Content Remove="wwwroot\css\bootstrap\dist\fonts\**" />
+    <Content Remove="wwwroot\css\bootstrap\dist\js\**" />
+    <Content Remove="wwwroot\css\bootstrap\fonts\**" />
+    <Content Remove="wwwroot\css\bootstrap\grunt\**" />
+    <Content Remove="wwwroot\css\bootstrap\js\**" />
+    <Content Remove="wwwroot\css\bootstrap\less\**" />
+    <Content Remove="wwwroot\css\bootstrap\nuget\**" />
+    <Content Remove="wwwroot\popper.js\**" />
+    <EmbeddedResource Remove="bin\popper.js\**" />
+    <EmbeddedResource Remove="wwwroot\bootstrap\dist\fonts\**" />
+    <EmbeddedResource Remove="wwwroot\bootstrap\dist\js\**" />
+    <EmbeddedResource Remove="wwwroot\bootstrap\fonts\**" />
+    <EmbeddedResource Remove="wwwroot\bootstrap\grunt\**" />
+    <EmbeddedResource Remove="wwwroot\bootstrap\js\**" />
+    <EmbeddedResource Remove="wwwroot\bootstrap\less\**" />
+    <EmbeddedResource Remove="wwwroot\bootstrap\nuget\**" />
+    <EmbeddedResource Remove="wwwroot\css\bootstrap\dist\fonts\**" />
+    <EmbeddedResource Remove="wwwroot\css\bootstrap\dist\js\**" />
+    <EmbeddedResource Remove="wwwroot\css\bootstrap\fonts\**" />
+    <EmbeddedResource Remove="wwwroot\css\bootstrap\grunt\**" />
+    <EmbeddedResource Remove="wwwroot\css\bootstrap\js\**" />
+    <EmbeddedResource Remove="wwwroot\css\bootstrap\less\**" />
+    <EmbeddedResource Remove="wwwroot\css\bootstrap\nuget\**" />
+    <EmbeddedResource Remove="wwwroot\popper.js\**" />
+    <None Remove="bin\popper.js\**" />
+    <None Remove="wwwroot\bootstrap\dist\fonts\**" />
+    <None Remove="wwwroot\bootstrap\dist\js\**" />
+    <None Remove="wwwroot\bootstrap\fonts\**" />
+    <None Remove="wwwroot\bootstrap\grunt\**" />
+    <None Remove="wwwroot\bootstrap\js\**" />
+    <None Remove="wwwroot\bootstrap\less\**" />
+    <None Remove="wwwroot\bootstrap\nuget\**" />
+    <None Remove="wwwroot\css\bootstrap\dist\fonts\**" />
+    <None Remove="wwwroot\css\bootstrap\dist\js\**" />
+    <None Remove="wwwroot\css\bootstrap\fonts\**" />
+    <None Remove="wwwroot\css\bootstrap\grunt\**" />
+    <None Remove="wwwroot\css\bootstrap\js\**" />
+    <None Remove="wwwroot\css\bootstrap\less\**" />
+    <None Remove="wwwroot\css\bootstrap\nuget\**" />
+    <None Remove="wwwroot\popper.js\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="bower_components\bootstrap\dist\css\LayoutStyle.css">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

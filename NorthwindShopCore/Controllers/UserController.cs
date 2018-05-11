@@ -61,6 +61,18 @@ namespace NorthwindShopCore.Controllers
                         signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
+                //HttpContext.SignInAsync(IdentityConstants.ExternalScheme, new ClaimsPrincipal(identity));
+                /*
+                var response = new
+                {
+                    access_token = encodedJwt,
+                    username = identity.Name
+                };
+
+                Response.ContentType = "application/json";
+                 Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
+                 */
+
                 return Json(HttpStatusCode.Accepted);
             }
 
@@ -140,7 +152,6 @@ namespace NorthwindShopCore.Controllers
 
             IdentityUser user = identityUsers.FirstOrDefault(p => p.UserName == username );
 
-
             if (user != null)
             {
                 var claims = new List<Claim>
@@ -170,26 +181,30 @@ namespace NorthwindShopCore.Controllers
           new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
               ClaimsIdentity.DefaultRoleClaimType);
             return claimsIdentity;
-        } 
+        }
 
-        /*
+        
         [HttpGet("IsAuth")]
         public JsonResult IsAuth()
         {
-          //  bool isAuthenticated = User.Identity.IsAuthenticated;
+            bool isAuth = HttpContext.User.Identity.IsAuthenticated;
 
-            var userCheck = _signInManager.IsSignedIn(User);
+       //     bool isAuthenticated = User.Identity.IsAuthenticated;
 
-         //   var userExternal = HttpContext.GetTokenAsync(IdentityConstants.ExternalScheme, "Token");
+            
+            //  return Json(new { first=isAuth,second=isAuthenticated});
 
-            return Json(userCheck);
+        //    var Jsonresult = JsonConvert.SerializeObject(HttpContext.GetTokenAsync("access_token"));
+      
+            return Json(isAuth);
         }
-        */
+        
+
 
         [HttpPost("LogOff")]
         public JsonResult LogOff()
         {
-             HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             return Json(HttpStatusCode.Accepted);
         }

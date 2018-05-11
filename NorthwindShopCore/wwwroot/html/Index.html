@@ -2,18 +2,34 @@
 
 <link href="../../css/LayoutStyle.css" rel="stylesheet" type="text/css" />
 
+<link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+
+<script src="../../popper/dist/umd/popper.js" type="text/javascript"></script>
+<script src="../../bootstrap/dist/js/bootstrap.js" type="text/javascript"> </script>
+
 <div id="header">
     <h1 id="Title">Jessica Shop</h1>
     <div id="userLayout">
-
     </div>
 </div>
 
 <div id="sidebar">
-    <p><a href="/html/Product/Confections.html">Confections</a></p>
-    <p><a href="/html/Product/Beverages.html">Beverages</a></p>
+
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Products</button>
+        <ul class="dropdown-menu">
+            <li><a href="/html/Product/Confections.html">Confections</a></li>
+            <li><a href="/html/Product/Beverages.html">Beverages</a></li>
+        </ul>
+    </div>
+
     <hr />
-    <p><a href="/html/Product/Cart.html">Cart</a></p>
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Customer</button>
+        <ul class="dropdown-menu">
+            <li><a href="/html/Product/Cart.html">Cart</a></li>
+        </ul>
+    </div>
     <br />
     <br />
     <br />
