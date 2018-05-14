@@ -62,18 +62,20 @@ namespace NorthwindShopCore.Controllers
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
                 //HttpContext.SignInAsync(IdentityConstants.ExternalScheme, new ClaimsPrincipal(identity));
-                /*
+
                 var response = new
                 {
                     access_token = encodedJwt,
                     username = identity.Name
                 };
 
-                Response.ContentType = "application/json";
-                 Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
-                 */
+                //Response.ContentType = "application/json";
+                //Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
 
-                return Json(HttpStatusCode.Accepted);
+                var JsonResponse = JsonConvert.SerializeObject(new { JsonResponseRes=response, JsonHttpStatusCode =HttpStatusCode.Accepted});
+
+                //  return Json(new { AccessJson=JsonResult, HttpCode=HttpStatusCode.Accepted });
+                return Json(JsonResponse);
             }
 
                return Json(HttpStatusCode.BadRequest);
@@ -196,7 +198,7 @@ namespace NorthwindShopCore.Controllers
 
         //    var Jsonresult = JsonConvert.SerializeObject(HttpContext.GetTokenAsync("access_token"));
       
-            return Json(HttpContext.Request.Headers);
+            return Json(isAuth);
         }
         
 

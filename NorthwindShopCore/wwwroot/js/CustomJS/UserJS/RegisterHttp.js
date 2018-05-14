@@ -32,13 +32,13 @@ function RegisterFunc() {
 
                         swal("Success", "Welcome to our shop!", "success");
 
-                        setTimeout(RedirecttoRegister, 1500);
+                        setTimeout(RedirectToMain, 1500);
 
                     }
                     else if (data == 400) {
 
                         swal("Error", "Typed incorrected data or IIS 500 error", "error");
-                        setTimeout(RedirectToMain, 1000);
+                        setTimeout(RedirecttoRegister, 1000);
 
                     }
 

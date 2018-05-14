@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../../kendo-ui/js/jquery.js"></script>
+
+</head>
+<body>
+
+    <script>
+        $.getJSON({
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/JSON',
+            url: '/user/User/IsAuth',
+            success: function (data) {
+
+                alert(data);
+
+
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+
+
+    </script>
+
+</body>
+</html>

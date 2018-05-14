@@ -22,11 +22,14 @@
                  async: false,
                  success: function (data) {
 
-                     if (data == 202) {
-                         /*
-                         // сохраняем в хранилище sessionStorage токен доступа
-                         sessionStorage.setItem(tokenKey, data.access_token);
-                         */
+                     var ResultToKen = jQuery.parseJSON(data);
+
+                     alert(ResultToKen.JsonResponseRes.access_token);
+
+                     if (ResultToKen.JsonHttpStatusCode == 202) {
+
+                         //sessionStorage.setItem(tokenKey, data.access_token);
+
                          localStorage.setItem('UserName', name);
 
                          swal("Success", "You are in system", "success");
@@ -34,7 +37,7 @@
                          setTimeout(RedirectToMain, 1000);
 
                      }
-                     else if (data == 400) {
+                     else if (ResultToKen.JsonHttpStatusCode == 400) {
 
                          swal("Error", "Typed incorrected data", "error");
 
