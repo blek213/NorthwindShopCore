@@ -12,6 +12,9 @@
         dataType: 'json',
         contentType: 'application/JSON',
         url: '/user/User/Register?IdProductSet=' + IdProductSet + "&InputText=" + InputText + "&button=" + button,
+        //beforeSend: function (xhr) {
+        //    xhr.setRequestHeader('Authorization', 'Bearer t-7614f875-8423-4f20-a674-d7cf3096290e');
+        //},
         success: function (data) {
 
             var UserNameForm = $("#name").val();

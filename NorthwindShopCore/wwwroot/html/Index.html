@@ -4,39 +4,51 @@
 
 <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
 
+
 <script src="../../popper/dist/umd/popper.js" type="text/javascript"></script>
-<script src="../../bootstrap/dist/js/bootstrap.js" type="text/javascript"> </script>
+<script src="../../bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
 
+<div class="container-fluid">
 
-<div id="header">
-    <h1 id="Title">Jessica Shop</h1>
-    <div id="userLayout">
+    <div class="row">
+        <div id="header" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h1 id="Title">Jessica Shop</h1>
+            <div id="userLayout" class="text-right">
+                <span id="Register"><a href="/html/User/Register.html">Register</a></span>
+                <span id="SignIn"><a href="/html/User/Login.html">SignIn</a></span>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding:20px;" class="row">
+        <div class="col-md-3 col-md-push-3">
+
+            <div id="sidebar">
+
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Products</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="/html/Product/Confections.html">Confections</a></li>
+                        <li><a href="/html/Product/Beverages.html">Beverages</a></li>
+                    </ul>
+                </div>
+
+                <hr />
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Customer</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="/html/Product/Cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+            </div>
+
+        </div>
     </div>
 </div>
-
-<div id="sidebar">
-
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Products</button>
-        <ul class="dropdown-menu">
-            <li><a href="/html/Product/Confections.html">Confections</a></li>
-            <li><a href="/html/Product/Beverages.html">Beverages</a></li>
-        </ul>
-    </div>
-
-    <hr />
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Customer</button>
-        <ul class="dropdown-menu">
-            <li><a href="/html/Product/Cart.html">Cart</a></li>
-        </ul>
-    </div>
-    <br />
-    <br />
-    <br />
-    <br />
-</div>
-
-<script src="../../js/CustomJS/IsAuth.js" type="text/javascript"></>
+<script src="../../js/CustomJS/IsAuth.js" type="text/javascript"></script>
 
 

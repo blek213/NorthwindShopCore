@@ -196,7 +196,7 @@ namespace NorthwindShopCore.Controllers
 
         //    var Jsonresult = JsonConvert.SerializeObject(HttpContext.GetTokenAsync("access_token"));
       
-            return Json(isAuth);
+            return Json(HttpContext.Request.Headers);
         }
         
 

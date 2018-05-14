@@ -14,6 +14,7 @@
     <script src="../../js/sweetalert.min.js"></script>
     <script src="../../js/sweetalert-dev.js"></script>
 
+    <script src="../../js/validator.min.js"></script>
 
 </head>
 <body>
@@ -21,27 +22,70 @@
         .col-sm-12 {
             padding-top: 10px;
         }
+
+        .form-control-feedback {
+            right: 10px;
+        }
+
+        .red {
+            color: #ff0000;
+        }
+
+        label {
+            padding-left: 1.5%;
+        }
     </style>
 
     <div class="col-sm-12">
-        <form>
-            <p>Name</p>
-            <input id="name" type="text" name="name" /><br /><br />
-            <p>Email</p>
-            <input id="email" type="text" name="email" /><br /><br />
-            <p>Password</p>
-            <input id="password" type="password" name="password" /><br /><br />
-            <p>Repeat password</p>
-            <input id="repeatpassword" type="password" name="repeatpassword" /><br /><br />
-            <input  class="btn btn-primary btn-md" type="button" value="Register" onclick="return RegisterFunc();" ><br /><br />
+
+        <form class="form-horizontal" id="form">
+            <div class="form-group">
+                <label for="name">Name <span class="red">*</span></label><br /><br />
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" pattern=".{4,}" title="Six or more characters" required>
+                    <span id="ErrorTextForName" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Password">Password <span class="red">*</span></label><br /><br />
+                <div class="col-sm-2">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Password">RepeatPassword <span class="red">*</span></label><br /><br />
+                <div class="col-sm-2">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="RepeatPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <input type="button" class="btn btn-primary btn-md" value="SignIn" onclick="return RegisterFunc();" /><br /><br />
+                </div>
+            </div>
+
         </form>
 
         <p><a href="Login.html">SignIn</a></p>
         <hr />
         <div><a href="../Values/Greeting.html">Back</a></div>
 
-        </div>
-        <script src="../../js/CustomJS/UserJS/RegisterHttp.js" type="text/javascript"></script>
+    </div>
+
+    <script>
+        $(function () {
+            $('#form').validator({
+                feedback: {
+                    success: 'glyphicon-thumbs-up',
+                    error: 'glyphicon-thumbs-down'
+                }
+            });
+        });
+    </script>
+    <script src="../../js/CustomJS/UserJS/RegisterHttp.js" type="text/javascript"></script>
 
 </body>
 </html>

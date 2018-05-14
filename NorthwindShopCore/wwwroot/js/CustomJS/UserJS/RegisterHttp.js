@@ -6,48 +6,79 @@ function RegisterFunc() {
     var password = $("#password").val();
     var repeatpassword = $("#repeatpassword").val();
 
+    var validateVal = ValidateForm(name, email, password, repeatpassword);
+
+
     email = encodeURIComponent(email);
     password = encodeURIComponent(password);
     repeatpassword = encodeURIComponent(repeatpassword);
 
-    setTimeout(GetHttpResponse, 1);
+    if (validateVal == true) {
 
-    function GetHttpResponse() {
-        $.getJSON({
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/JSON',
-            url: '/user/User/Register?name=' + name + "&email=" + email + "&password=" + password + "&repeatpassword=" + repeatpassword,
-            async: false,
-            success: function (data) {
+        setTimeout(GetHttpResponse, 1);
 
-                if (data == 202) {
+        function GetHttpResponse() {
+            $.getJSON({
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/JSON',
+                url: '/user/User/Register?name=' + name + "&email=" + email + "&password=" + password + "&repeatpassword=" + repeatpassword,
+                async: false,
+                success: function (data) {
 
-                    localStorage.setItem('UserName', name);
+                    if (data == 202) {
 
-                    swal("Success", "Welcome to our shop!", "success");
+                        localStorage.setItem('UserName', name);
 
-                    setTimeout(RedirecttoRegister,1500);
+                        swal("Success", "Welcome to our shop!", "success");
 
-                }
-                else if (data == 400) {
+                        setTimeout(RedirecttoRegister, 1500);
 
+                    }
+                    else if (data == 400) {
+
+                        swal("Error", "Typed incorrected data or IIS 500 error", "error");
+                        setTimeout(RedirectToMain, 1000);
+
+                    }
+
+                },
+                error: function (message) {
                     swal("Error", "Typed incorrected data or IIS 500 error", "error");
-                    setTimeout(RedirectToMain, 1000);
 
+                    setTimeout(RedirecttoRegister, 1500);
                 }
 
-            },
-            error: function (message) {
-                swal("Error", "Typed incorrected data or IIS 500 error", "error");
-
-                setTimeout(RedirecttoRegister, 1500);
-            }
-
-        });
+            });
+        }
     }
- 
+    else {
+        swal("Error", "Typed incorrected data", "error");
+
+    }
+
 }
+
+function ValidateForm(name, email, password, repeatpassword) {
+
+    if (name == "" || password == "" || email == "" || repeatpassword == "") {
+
+        return false;
+    }
+
+    if (name.length <= 3)
+    {
+
+        return false;
+    }
+
+    if (password != repeatpassword) {
+        return false;
+    }
+
+    return true;
+}
+
 
 function RedirecttoRegister() {
     window.location.href = "Register.html";

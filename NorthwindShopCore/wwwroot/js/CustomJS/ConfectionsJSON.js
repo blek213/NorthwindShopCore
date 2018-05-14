@@ -11,11 +11,18 @@ function ShowConfections() {
 
             var results = $("#ConfectionsList");
 
-            /*
-            alert(data[0].ProductName);
-            alert(data.ProductName);
-            */
+
+            //alert(data[0].ProductName);
+
+            //var newJsonKK = JSON.stringify(data);
+
+            //var yourval = jQuery.parseJSON(JSON.stringify(data));
+
+            //alert(yourval[0]);
+
             var confectionsObject = jQuery.parseJSON(data);
+
+            //alert(confectionsObject[0].ProductName);
 
             var confectionsData = [];
 
