@@ -9,6 +9,7 @@ using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -35,12 +36,6 @@ namespace NorthwindShopCore.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
             _configuration = configuration;
-        }
-
-        [HttpPost("SwapRab")]
-        public JsonResult SwapRab()
-        {
-            return Json("202");
         }
 
         [HttpPost("Login")]
@@ -77,7 +72,6 @@ namespace NorthwindShopCore.Controllers
                 //  return Json(new { AccessJson=JsonResult, HttpCode=HttpStatusCode.Accepted });
                 return Json(JsonResponse);
             }
-
                return Json(HttpStatusCode.BadRequest);
         }
 
@@ -185,20 +179,19 @@ namespace NorthwindShopCore.Controllers
             return claimsIdentity;
         }
 
-        
         [HttpGet("IsAuth")]
+        [Authorize]
         public JsonResult IsAuth()
         {
-            bool isAuth = HttpContext.User.Identity.IsAuthenticated;
+            //var UserTokenHash = HttpContext.Request.Headers["Authorization"];
 
-       //     bool isAuthenticated = User.Identity.IsAuthenticated;
+            //List<IdentityUser> identityUsers = _userManager.Users.ToList();
 
-            
-            //  return Json(new { first=isAuth,second=isAuthenticated});
+            //IdentityUser user = identityUsers.FirstOrDefault(p=>p.UserName == UserName);
 
-        //    var Jsonresult = JsonConvert.SerializeObject(HttpContext.GetTokenAsync("access_token"));
-      
-            return Json(isAuth);
+            //var VerifactionResult = _userManager.VerifyUserTokenAsync(user,"", "", UserTokenHash);
+
+            return Json(HttpStatusCode.Accepted);
         }
         
 

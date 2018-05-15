@@ -16,19 +16,50 @@
 
     </div>
 
-    <div id="content">
+    <div style="padding:20px;" class="row">
 
+        <div class="col-md-3 ">
 
-        <div id="ProductList">
+            <div id="sidebar">
+
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Products</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="/html/Product/Confections.html">Confections</a></li>
+                        <li><a href="/html/Product/Beverages.html">Beverages</a></li>
+                    </ul>
+                </div>
+
+                <hr />
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Customer</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="/html/Product/Cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+            </div>
 
         </div>
+        <div id="content" class="col-md-9">
 
-        <div id="BuyDiv">
-            <input id="BuyButton" type="button" value="Buy" onclick="return BuyProduct();" />
+            <div id="ProductList">
+
+            </div>
+
+            <div id="BuyDiv">
+                <input id="BuyButton" type="button" value="Buy" onclick="return BuyProduct();" />
+
+            </div>
 
         </div>
-
     </div>
+
+
+
 
     <div id="fromIndexFooter">
 

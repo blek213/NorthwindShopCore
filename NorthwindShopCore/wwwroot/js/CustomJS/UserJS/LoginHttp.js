@@ -30,7 +30,8 @@
 
                          //sessionStorage.setItem(tokenKey, data.access_token);
 
-                         localStorage.setItem('UserName', name);
+                         localStorage.setItem('accessUser_token', ResultToKen.JsonResponseRes.access_token);
+                         localStorage.setItem('UserName', ResultToKen.JsonResponseRes.username);
 
                          swal("Success", "You are in system", "success");
 

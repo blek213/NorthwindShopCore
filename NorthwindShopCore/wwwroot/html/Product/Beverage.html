@@ -16,26 +16,56 @@
     <div id="fromIndex">
 
     </div>
-    <div id="content">
-        <div id="Beverage">
-            <div id="ProductName"></div>
-            <div id="ImageCategory"></div>
-            <div id="ProductDescription">
-                <div id="QuantityPerUnit"><b><i>QuantityPerUnit: </i> </b></div>
-                <div id="UnitPrice"><b><i>UnitPrice: </i> </b> </div>
-                <div id="DiscountBool"><b><i>Discounted or not: </i></b></div>
+
+
+    <div style="padding:20px;" class="row">
+
+        <div class="col-md-3 ">
+
+            <div id="sidebar">
+
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Products</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="/html/Product/Confections.html">Confections</a></li>
+                        <li><a href="/html/Product/Beverages.html">Beverages</a></li>
+                    </ul>
+                </div>
+
+                <hr />
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Customer</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="/html/Product/Cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
-        </div>
 
-        <div id="OpenWindowBlock">
-            <input type="hidden" id="hiddenProductId" name="hiddenProductId" />
-            <input class="open_window" type="button" value="Buy" />
         </div>
+        <div id="content" class="col-md-9">
+            <div id="Beverage">
+                <div id="ProductName"></div>
+                <div id="ImageCategory"></div>
+                <div id="ProductDescription">
+                    <div id="QuantityPerUnit"><b><i>QuantityPerUnit: </i> </b></div>
+                    <div id="UnitPrice"><b><i>UnitPrice: </i> </b> </div>
+                    <div id="DiscountBool"><b><i>Discounted or not: </i></b></div>
+                </div>
+            </div>
 
-        <div class="overlay" title="Shopping cart"></div>
-        <div class="popup">
-            <h1 style="text-align:center;">Shopping cart</h1>
-            <ol>
+            <div id="OpenWindowBlock">
+                <input type="hidden" id="hiddenProductId" name="hiddenProductId" />
+                <input class="open_window" type="button" value="Buy" />
+            </div>
+
+            <div class="overlay" title="Shopping cart"></div>
+            <div class="popup">
+                <h1 style="text-align:center;">Shopping cart</h1>
+                <ol>
                     <li><span id="ProductNameInWindow"></span> <span><input id="minusButton" class="ArthButtons" type="button" value="-" /></span><span class="CountProducts"><input name="InputText" id="InputText" type="text" value="1" size="2" maxlength="4" /></span><span><input id="plusButton" class="ArthButtons" type="button" value="+" /></span></li>
                     <div id="ButtonsTwoActions">
                         <span id="ContinueButtonTag">
@@ -46,9 +76,12 @@
                             <input name="button" id="BuyButton" type="button" value="Buy" onclick="return BuyButtonFunc();" />
                         </span>
                     </div>
-            </ol>
+                </ol>
+            </div>
         </div>
     </div>
+
+   
 
     <div id="fromIndexFooter">
 

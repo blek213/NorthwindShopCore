@@ -32,18 +32,19 @@ function ShowProducts() {
 }
 
 function BuyProduct() {
-    var tokenKey = "accessToken";
+    var name = localStorage.getItem("UserName");
 
     $.ajax({
          type: 'GET',
          dataType: 'json',
          contentType: 'application/JSON',
-         url: '/user/User/IsAuth?NameFromLocalStorage=',
+        url: '/user/User/IsAuth',
         async: false,
         beforeSend: function (xhr) {
 
-            var token = sessionStorage.getItem(tokenKey);
-            xhr.setRequestHeader("Authorization", "Bearer " + token);
+            var token = localStorage.getItem("accessUser_token");
+
+            xhr.setRequestHeader("Authorization", token);
         },
          success: function (data) {
 
@@ -51,20 +52,10 @@ function BuyProduct() {
 
          },
          error: function () {
-             alert("You are not in system. Please sign in");
+             alert("Error. Please sign in again");
              window.location.href = "../Values/Greeting.html";
          }
 
      });
-
-    var localValue = localStorage.getItem('UserName');
-
-    if (localValue == null) {
-        window.location.href = "../User/Login.html";
-    }
-
-    else {
-        window.location.href = "../Product/BuyProduct.html";
-    }
 
 }
