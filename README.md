@@ -40,14 +40,18 @@
 Скріншоти роботи:
 
 ![Confections caterogy](https://github.com/blek213/NorthwindShopCore/blob/master/screens/1.png)
-![Confections caterogy](https://github.com/blek213/NorthwindShopCore/blob/master/screens/2.png)
-![Confections caterogy](https://github.com/blek213/NorthwindShopCore/blob/master/screens/3.png)
-![Confections caterogy](https://github.com/blek213/NorthwindShopCore/blob/master/screens/4.png)
+
+![Window](https://github.com/blek213/NorthwindShopCore/blob/master/screens/2.png)
+
+![Login](https://github.com/blek213/NorthwindShopCore/blob/master/screens/3.png)
+
+![LoginTokens](https://github.com/blek213/NorthwindShopCore/blob/master/screens/4.png)
 
 Слеш acess_token'a у alert 
 
-![Confections caterogy](https://github.com/blek213/NorthwindShopCore/blob/master/screens/5.png)
-![Confections caterogy](https://github.com/blek213/NorthwindShopCore/blob/master/screens/6.png)
+![Success signin](https://github.com/blek213/NorthwindShopCore/blob/master/screens/5.png)
+
+![Cart](https://github.com/blek213/NorthwindShopCore/blob/master/screens/6.png)
 
 
 *Інструкція користувача:*
