@@ -41,17 +41,17 @@
 
 ![Confections caterogy](https://github.com/blek213/NorthwindShopCore/blob/master/screens/1.png)
 
-![Window](https://github.com/blek213/NorthwindShopCore/blob/master/screens/2.png)
+![Window](https://github.com/blek213/NorthwindShopCore/blob/master/screens/2.PNG)
 
-![Login](https://github.com/blek213/NorthwindShopCore/blob/master/screens/3.png)
+![Login](https://github.com/blek213/NorthwindShopCore/blob/master/screens/3.PNG)
 
-![LoginTokens](https://github.com/blek213/NorthwindShopCore/blob/master/screens/4.png)
+![LoginTokens](https://github.com/blek213/NorthwindShopCore/blob/master/screens/4.PNG)
 
 Слеш acess_token'a у alert 
 
 ![Success signin](https://github.com/blek213/NorthwindShopCore/blob/master/screens/5.png)
 
-![Cart](https://github.com/blek213/NorthwindShopCore/blob/master/screens/6.png)
+![Cart](https://github.com/blek213/NorthwindShopCore/blob/master/screens/6.PNG)
 
 
 *Інструкція користувача:*
