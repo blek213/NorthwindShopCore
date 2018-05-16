@@ -174,5 +174,12 @@ namespace NorthwindShopCore.Controllers
             return new HttpResponseMessage(HttpStatusCode.Accepted);
 
         }
+
+        [HttpDelete()]
+        public HttpResponseMessage ForFun()
+        {
+            return new HttpResponseMessage(HttpStatusCode.Accepted);
+
+        }
     }
 }

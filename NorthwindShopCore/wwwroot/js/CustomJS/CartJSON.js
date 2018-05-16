@@ -83,11 +83,16 @@ function IsCartEmpyFunc() {
         async: false,
         success: function (data) {
 
-
             if (data == true) {
-                resultBool=true;
+
+                resultBool = true;
+
             }
+
+
+
             if (data == false) {
+
                 resultBool=false;
             }
         },
