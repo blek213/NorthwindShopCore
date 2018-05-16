@@ -22,23 +22,21 @@
                  async: false,
                  success: function (data) {
 
-                     var ResultToKen = jQuery.parseJSON(data);
+                     alert(data.jsonResponseRes.access_token);
 
-                     alert(ResultToKen.JsonResponseRes.access_token);
-
-                     if (ResultToKen.JsonHttpStatusCode == 202) {
+                     if (data.jsonHttpStatusCode == 202) {
 
                          //sessionStorage.setItem(tokenKey, data.access_token);
 
-                         localStorage.setItem('accessUser_token', ResultToKen.JsonResponseRes.access_token);
-                         localStorage.setItem('UserName', ResultToKen.JsonResponseRes.username);
+                         localStorage.setItem('accessUser_token', data.jsonResponseRes.access_token);
+                         localStorage.setItem('UserName', data.jsonResponseRes.username);
 
                          swal("Success", "You are in system", "success");
 
                          setTimeout(RedirectToMain, 1000);
 
                      }
-                     else if (ResultToKen.JsonHttpStatusCode == 400) {
+                     else if (data.jsonHttpStatusCode == 400) {
 
                          swal("Error", "Typed incorrected data", "error");
 

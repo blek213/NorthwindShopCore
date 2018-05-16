@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using NorthwindShopCore.Filters;
 using NorthwindShopCore.Models;
 
 namespace NorthwindShopCore.Controllers
@@ -67,12 +68,11 @@ namespace NorthwindShopCore.Controllers
                 //Response.ContentType = "application/json";
                 //Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
 
-                var JsonResponse = JsonConvert.SerializeObject(new { JsonResponseRes=response, JsonHttpStatusCode =HttpStatusCode.Accepted});
-
                 //  return Json(new { AccessJson=JsonResult, HttpCode=HttpStatusCode.Accepted });
-                return Json(JsonResponse);
+                return Json(new { JsonResponseRes = response, JsonHttpStatusCode = HttpStatusCode.Accepted });
             }
-               return Json(HttpStatusCode.BadRequest);
+
+            return Json(HttpStatusCode.BadRequest);
         }
 
         [HttpPost("Register")]
@@ -108,12 +108,20 @@ namespace NorthwindShopCore.Controllers
                             signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
                     var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-                    return Json(HttpStatusCode.Accepted);
+                    var response = new
+                    {
+                        access_token = encodedJwt,
+                        username = identity.Name
+                    };
+
+
+                    return Json(new { JsonResponseRes = response, JsonHttpStatusCode = HttpStatusCode.Accepted });
 
                 }
             }
-            
-            return Json(HttpStatusCode.BadRequest);
+
+            return Json(HttpStatusCode.Forbidden);
+
         }
 
         public void AddToRoleAsyncFunc(IdentityUser User, IdentityRole roleUser)
@@ -185,9 +193,9 @@ namespace NorthwindShopCore.Controllers
             return claimsIdentity;
         }
 
-        [HttpGet("IsAuth")]
-        [Authorize(Roles ="user")]
-        public void IsAuth()
+        [HttpPost("IsAuth")]
+        [Authorize(Roles = "user")]
+        public JsonResult IsAuth()
         {
             //var UserTokenHash = HttpContext.Request.Headers["Authorization"];
 
@@ -198,10 +206,10 @@ namespace NorthwindShopCore.Controllers
             //var VerifactionResult = _userManager.VerifyUserTokenAsync(user,"", "", UserTokenHash);
 
             //return Json(HttpStatusCode.Accepted);
+
+            return Json(HttpStatusCode.Accepted);
         }
         
-
-
         [HttpPost("LogOff")]
         public JsonResult LogOff()
         {

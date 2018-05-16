@@ -132,7 +132,6 @@ namespace NorthwindShopCore.Controllers
             {
                 if (Product.CategoryId == 3)
                 {
-                    //   return Redirect("~/html/Product/Confection.html?ConfectionIdVal=" + IdProductSet);
                     return Json("Confection");
                 }
 
@@ -145,12 +144,34 @@ namespace NorthwindShopCore.Controllers
             return Json("Buy");
         }
 
-        [HttpPost("BuyProduct")]
-        public JsonResult BuyProduct()
+        [HttpPost("isNullCookie")]
+        public JsonResult isNullCookie()
+        {
+            string cookieVal = Request.Cookies["ProductName"];
+
+            if(cookieVal == null)
+            {
+                return Json("false");
+
+            }
+
+            return Json("true");
+        }
+
+        [HttpPost("DeleteProducts")]
+        public HttpResponseMessage DeleteProducts()
         {
             Response.Cookies.Delete("ProductName");
 
-            return Json(HttpStatusCode.Accepted);
+            return new HttpResponseMessage(HttpStatusCode.Accepted);
+        }
+
+        [HttpPost("BuyProduct")]
+        public HttpResponseMessage BuyProduct()
+        {
+            Response.Cookies.Delete("ProductName");
+
+            return new HttpResponseMessage(HttpStatusCode.Accepted);
 
         }
     }

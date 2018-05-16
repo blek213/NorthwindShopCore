@@ -64,18 +64,19 @@ namespace NorthwindShopCore
                           // валидация ключа безопасности
                           ValidateIssuerSigningKey = true,
                       };
+
                   });
 
-            /*
-            services.AddAuthentication(sharedOptions =>
-            {
-                sharedOptions.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                sharedOptions.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                sharedOptions.DefaultAuthenticateScheme= CookieAuthenticationDefaults.AuthenticationScheme;
 
-                sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-            });
-            */
+            // Если добавить это, то при проверки аудентификации будет ошибка 500
+            //services.AddAuthentication(sharedOptions =>
+            //{
+            //    sharedOptions.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //    sharedOptions.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //    sharedOptions.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+            //    sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            //});
 
             services.AddMvc();
         }

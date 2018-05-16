@@ -18,7 +18,7 @@ function RegisterFunc() {
         setTimeout(GetHttpResponse, 1);
 
         function GetHttpResponse() {
-            $.getJSON({
+            $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 contentType: 'application/JSON',
@@ -26,18 +26,25 @@ function RegisterFunc() {
                 async: false,
                 success: function (data) {
 
-                    if (data == 202) {
+                    alert(data);
 
-                        localStorage.setItem('UserName', name);
+                    alert(data.jsonResponseRes.access_token);
+
+                    console.log(data);
+
+                    if (data.jsonHttpStatusCode == 202) {
+
+                        localStorage.setItem('accessUser_token', data.jsonResponseRes.access_token);
+                        localStorage.setItem('UserName', data.jsonResponseRes.username);
 
                         swal("Success", "Welcome to our shop!", "success");
 
                         setTimeout(RedirectToMain, 1500);
 
                     }
-                    else if (data == 400) {
+                    else if (data.jsonHttpStatusCode == 403) {
 
-                        swal("Error", "Typed incorrected data or IIS 500 error", "error");
+                        swal("Error", "The same user has existed", "error");
                         setTimeout(RedirecttoRegister, 1000);
 
                     }
