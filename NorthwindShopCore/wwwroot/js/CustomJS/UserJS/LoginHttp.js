@@ -57,24 +57,28 @@
          }
 
      }
+     else {
+         swal("Error", "Typed incorrected data", "error");
+
+     }
 
 }
 
 function ValidateForm() {
 
-    //var nameVal = $("#name").val();
-    //var passwordVal = $("#password").val();
+    var nameVal = $("#name").val();
+    var passwordVal = $("#password").val();
 
-    //if (nameVal == "" || passwordVal == "") {
+    if (nameVal == "" || passwordVal == "") {
 
-    //    return false;
-    //}
+        return false;
+    }
 
-    //if (nameVal.length <= 3)
-    //{
+    if (nameVal.length <= 3)
+    {
       
-    //    return false;
-    //}
+        return false;
+    }
 
     return true;
 }

@@ -92,7 +92,8 @@ namespace NorthwindShopCore.Controllers
 
                 if (identity == null)
                 {
-                     _userManager.AddToRoleAsync(User, roleUser.Name);
+
+                    AddToRoleAsyncFunc(User, roleUser);
 
                     var now = DateTime.UtcNow;
 
@@ -113,6 +114,11 @@ namespace NorthwindShopCore.Controllers
             }
             
             return Json(HttpStatusCode.BadRequest);
+        }
+
+        public void AddToRoleAsyncFunc(IdentityUser User, IdentityRole roleUser)
+        {
+            _userManager.AddToRoleAsync(User, roleUser.Name);
         }
 
         private ClaimsIdentity GetIdentityLogin(string name, string password)
@@ -180,8 +186,8 @@ namespace NorthwindShopCore.Controllers
         }
 
         [HttpGet("IsAuth")]
-        [Authorize]
-        public JsonResult IsAuth()
+        [Authorize(Roles ="user")]
+        public void IsAuth()
         {
             //var UserTokenHash = HttpContext.Request.Headers["Authorization"];
 
@@ -191,7 +197,7 @@ namespace NorthwindShopCore.Controllers
 
             //var VerifactionResult = _userManager.VerifyUserTokenAsync(user,"", "", UserTokenHash);
 
-            return Json(HttpStatusCode.Accepted);
+            //return Json(HttpStatusCode.Accepted);
         }
         
 

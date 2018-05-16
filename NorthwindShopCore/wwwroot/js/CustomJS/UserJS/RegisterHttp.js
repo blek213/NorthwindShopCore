@@ -41,7 +41,6 @@ function RegisterFunc() {
                         setTimeout(RedirecttoRegister, 1000);
 
                     }
-
                 },
                 error: function (message) {
                     swal("Error", "Typed incorrected data or IIS 500 error", "error");

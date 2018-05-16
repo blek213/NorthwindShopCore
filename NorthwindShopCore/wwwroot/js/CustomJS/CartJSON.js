@@ -44,7 +44,7 @@ function BuyProduct() {
 
             var token = localStorage.getItem("accessUser_token");
 
-            xhr.setRequestHeader("Authorization", token);
+            xhr.setRequestHeader("Authorization", "Bearer "+ token);
         },
          success: function (data) {
 

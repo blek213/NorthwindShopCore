@@ -36,13 +36,13 @@ namespace NorthwindShopCore.Controllers
         [HttpPost("ConfectionsJsonResult")]
         public JsonResult ConfectionsJsonResult()
         {
-            //  IEnumerable<Products> confections = DbNorthWind.Products.Where(p => p.CategoryId == 3);
+            IEnumerable<Products> confections = DbNorthWind.Products.Where(p => p.CategoryId == 3);
 
-            var confections = DbNorthWind.Products.Where(p => p.CategoryId == 3);
+            //var confections = DbNorthWind.Products.Where(p => p.CategoryId == 3);
 
-            var JsonConfections = JsonConvert.SerializeObject(confections);
+            //var JsonConfections = JsonConvert.SerializeObject(confections);
 
-            return Json(JsonConfections);
+            return Json(confections);
         }
 
         [HttpPost("BeveragesJsonResult")]
