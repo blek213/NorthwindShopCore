@@ -12,11 +12,11 @@ function ShowProducts() {
             if (data != null) {
                 var resuts = $("#ProductList");
 
-                var ProductsObject = jQuery.parseJSON(data);
+                console.log(data);
 
                 var discountOrNot;
 
-                if (ProductsObject.Obj.Discontinued == true) {
+                if (data.obj.discontinued == true) {
                     discountOrNot = "It's discontinued";
 
                 }
@@ -24,7 +24,7 @@ function ShowProducts() {
                     discountOrNot = "It's not discontinued";
                 }
                  
-                resuts.append("<p style='text-align:center;'>" + ProductsObject.Obj.ProductName +"</p>"+ "<p>"+ "<b> QuantityPerUnit: </b> " + ProductsObject.Obj.QuantityPerUnit + "<b> UnitPrice: </b>" + ProductsObject.Obj.UnitPrice + "<b> Discount: </b>" + discountOrNot +"<b><i> | Count:" + ProductsObject.CountProducts +" |</b></i>" +  "</p>");
+                resuts.append("<p style='text-align:center;'>" + data.obj.productName +"</p>"+ "<p>"+ "<b> QuantityPerUnit: </b> " + data.obj.quantityPerUnit + "<b> UnitPrice: </b>" + data.obj.UnitPrice + "<b> Discount: </b>" + discountOrNot +"<b><i> | Count:" + data.countProducts +" |</b></i>" +  "</p>");
             }
 
         }

@@ -7,16 +7,14 @@
 
         var results = $("#BeveragesList");
 
-        var beveragesObject = jQuery.parseJSON(data);
-
         var beveragesData = [];
 
         for (var i = 0; i < data.length; i++) {
 
             try {
 
-                var ProductNameVal = beveragesObject[i].ProductName;
-                var ProductId = beveragesObject[i].ProductId;
+                var ProductNameVal = data[i].productName;
+                var ProductId = data[i].productId;
 
                 beveragesData.push({
                     "ProductId": ProductId,

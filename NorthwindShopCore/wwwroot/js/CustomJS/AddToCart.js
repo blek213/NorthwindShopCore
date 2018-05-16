@@ -13,9 +13,7 @@ function ShowProduct() {
         url: '/api/Product/AddToCart?IdProductFromView=' + ProductIdVal,
         success: function (data) {
 
-            var ProductObject = jQuery.parseJSON(data);
-
-            $("#ResultFromAddCart").append(ProductObject.ProductName);
+            $("#ResultFromAddCart").append(data.productName);
 
         },
         error: function (x, y, z) {

@@ -24,21 +24,19 @@ function ShowBeverage() {
 
             var ProductDiscountBool = $("#DiscountBool");
 
-            var beverageObject = jQuery.parseJSON(data);
+            ProductNameResult.append("<p>" + data[0].productName + "</p>");
+            ProductQuantityResult.append("<p>" + data[0].quantityPerUnit + "</p>");
+            ProductUnitPrice.append("<p>" + data[0].unitPrice + "</p>");
 
-            ProductNameResult.append("<p>" + beverageObject[0].ProductName + "</p>");
-            ProductQuantityResult.append("<p>" + beverageObject[0].QuantityPerUnit + "</p>");
-            ProductUnitPrice.append("<p>" + beverageObject[0].UnitPrice + "</p>");
-
-            if (beverageObject[0].Discontinued == true) {
+            if (data[0].discontinued == true) {
                 ProductDiscountBool.append("<p>" + "it's discounted" + "</p>")
             }
             else {
                 ProductDiscountBool.append("<p>" + "it's not discounted" + "</p>")
             }
 
-            var checkAA = $("#hiddenProductId").attr("value", String(beverageObject[0].ProductId));
-            var checkBB = $("#IdProductSet").attr("value", String(beverageObject[0].ProductId));
+            var checkAA = $("#hiddenProductId").attr("value", String(data[0].productId));
+            var checkBB = $("#IdProductSet").attr("value", String(data[0].productId));
            
         },
         error: function (x, y, z) {

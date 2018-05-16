@@ -25,21 +25,19 @@ function ShowConfection() {
 
             var ProductDiscountBool = $("#DiscountBool");
 
-            var confectionObject = jQuery.parseJSON(data);
+            ProductNameResult.append("<p>" + data[0].productName + "</p>");
+            ProductQuantityResult.append("<p>" + data[0].quantityPerUnit + "</p>");
+            ProductUnitPrice.append("<p>" + data[0].unitPrice + "</p>");
 
-            ProductNameResult.append("<p>" + confectionObject[0].ProductName + "</p>");
-            ProductQuantityResult.append("<p>" + confectionObject[0].QuantityPerUnit + "</p>");
-            ProductUnitPrice.append("<p>" + confectionObject[0].UnitPrice + "</p>");
-
-            if (confectionObject[0].Discontinued == true) {
+            if (data[0].discontinued == true) {
                 ProductDiscountBool.append("<p>" + "it's discounted" + "</p>")
             }
             else {
                 ProductDiscountBool.append("<p>" + "it's not discounted" + "</p>")
             }
 
-            var checkAA = $("#hiddenProductId").attr("value", String(confectionObject[0].ProductId));
-            var checkBB = $("#IdProductSet").attr("value", String(confectionObject[0].ProductId));
+            var checkAA = $("#hiddenProductId").attr("value", String(data[0].productId));
+            var checkBB = $("#IdProductSet").attr("value", String(data[0].productId));
 
         },
         error: function (x, y, z) {

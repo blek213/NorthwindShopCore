@@ -38,21 +38,15 @@ namespace NorthwindShopCore.Controllers
         {
             IEnumerable<Products> confections = DbNorthWind.Products.Where(p => p.CategoryId == 3);
 
-            //var confections = DbNorthWind.Products.Where(p => p.CategoryId == 3);
-
-            //var JsonConfections = JsonConvert.SerializeObject(confections);
-
             return Json(confections);
         }
 
         [HttpPost("BeveragesJsonResult")]
         public JsonResult BeveragesJsonResult()
         {
-            var beverages = DbNorthWind.Products.Where(p => p.CategoryId == 1);
+            IEnumerable<Products> beverages = DbNorthWind.Products.Where(p => p.CategoryId == 1);
 
-            var JsonBeverages = JsonConvert.SerializeObject(beverages);
-
-            return Json(JsonBeverages);
+            return Json(beverages);
         }
 
         [HttpGet("ConfectionJsonResult/{ConfectionId}")]
@@ -60,9 +54,7 @@ namespace NorthwindShopCore.Controllers
         {
             var modelConfection = DbNorthWind.Products.Where(p => p.ProductId == ConfectionId);
 
-            var JsonConfection = JsonConvert.SerializeObject(modelConfection);
-
-            return Json(JsonConfection);
+            return Json(modelConfection);
         }
 
         [HttpGet("BeverageJsonResult/{BeverageId}")]
@@ -70,9 +62,7 @@ namespace NorthwindShopCore.Controllers
         {
             var modelBeverage = DbNorthWind.Products.Where(p => p.ProductId == BeverageId);
 
-            var JsonBeverage = JsonConvert.SerializeObject(modelBeverage);
-
-            return Json(JsonBeverage);
+            return Json(modelBeverage);
         }
 
         [HttpGet("AddToCart")]
@@ -80,9 +70,7 @@ namespace NorthwindShopCore.Controllers
         {
             var Product = DbNorthWind.Products.First(p => p.ProductId == IdProductFromView);
 
-            var JsonProduct = JsonConvert.SerializeObject(Product);
-
-            return Json(JsonProduct);
+            return Json(Product);
         }
 
         [HttpGet("CartJsonResult")]
@@ -120,9 +108,7 @@ namespace NorthwindShopCore.Controllers
 
                 var ProductResult = new { Obj = FoundModel, CountProducts = Count };
 
-                var JsonResult = JsonConvert.SerializeObject(ProductResult);
-
-                return Json(JsonResult);
+                return Json(ProductResult);
             }
 
             return null;
