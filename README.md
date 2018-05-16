@@ -1,5 +1,5 @@
 # NorthwindShopCore
-#Lab2,Lab3,Lab4,Lab5,Lab6 по КПП 
+# Lab2,Lab3,Lab4,Lab5,Lab6 по КПП 
 
 Мій стажерський проект у компанії Spilna Sprava на позиції Full Stack .Net developer 
 Дана система є інтернет магазином. 
@@ -36,5 +36,5 @@
 
 Скріншоти роботи:
 
-
+![Confections caterogy](https://github.com/blek213/NorthwindShopCore/blob/master/screens/1.png)
 
