@@ -83,6 +83,7 @@
     <Content Include="bower_components\bootstrap\dist\css\LayoutStyle.css">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Include="Models\CompanyRange\CompaniesRangeContext.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -96,20 +97,23 @@
     <PackageReference Include="json-serialize" Version="1.1.2" />
     <PackageReference Include="JWT" Version="4.0.0" />
     <PackageReference Include="Jwt.Token.Authorization.Server" Version="1.0.3" />
-    <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.4" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="2.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.6" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0" />
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.5" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
     <PackageReference Include="NetCore.Jwt" Version="1.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.2.2" />
   </ItemGroup>
 

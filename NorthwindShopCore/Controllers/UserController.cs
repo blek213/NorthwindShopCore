@@ -40,9 +40,9 @@ namespace NorthwindShopCore.Controllers
         }
 
         [HttpPost("Login")]
-        public JsonResult Login(string name, string password)
+        public async Task<JsonResult> Login(string name, string password)
         {
-            var identity =  GetIdentityLogin(name, password);
+            var identity =  await GetIdentityLogin(name, password);
 
             if(identity != null)
             {
@@ -92,7 +92,6 @@ namespace NorthwindShopCore.Controllers
 
                 if (identity == null)
                 {
-
                     AddToRoleAsyncFunc(User, roleUser);
 
                     var now = DateTime.UtcNow;
@@ -114,9 +113,7 @@ namespace NorthwindShopCore.Controllers
                         username = identity.Name
                     };
 
-
                     return Json(new { JsonResponseRes = response, JsonHttpStatusCode = HttpStatusCode.Accepted });
-
                 }
             }
 
@@ -129,7 +126,7 @@ namespace NorthwindShopCore.Controllers
             _userManager.AddToRoleAsync(User, roleUser.Name);
         }
 
-        private ClaimsIdentity GetIdentityLogin(string name, string password)
+        private async Task<ClaimsIdentity> GetIdentityLogin(string name, string password)
         {
             List<IdentityUser> identityUsers = _userManager.Users.ToList();
 
@@ -139,11 +136,19 @@ namespace NorthwindShopCore.Controllers
 
             if (user != null && checkPassword.Result == true)
             {
+                var roles = await _userManager.GetRolesAsync(user);
+
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType,name),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType,"user")
+                    new Claim(ClaimsIdentity.DefaultNameClaimType,user.UserName)
+
                 };
+
+                foreach (var role in roles)
+                {
+                    claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, role));
+                }
+
 
                 ClaimsIdentity claimsIdentity =
               new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
@@ -197,16 +202,7 @@ namespace NorthwindShopCore.Controllers
         [Authorize(Roles = "user")]
         public JsonResult IsAuth()
         {
-            //var UserTokenHash = HttpContext.Request.Headers["Authorization"];
-
-            //List<IdentityUser> identityUsers = _userManager.Users.ToList();
-
-            //IdentityUser user = identityUsers.FirstOrDefault(p=>p.UserName == UserName);
-
-            //var VerifactionResult = _userManager.VerifyUserTokenAsync(user,"", "", UserTokenHash);
-
-            //return Json(HttpStatusCode.Accepted);
-
+          
             return Json(HttpStatusCode.Accepted);
         }
         
@@ -217,6 +213,12 @@ namespace NorthwindShopCore.Controllers
 
             return Json(HttpStatusCode.Accepted);
         }
+
+        //public JsonResult GetTokens()
+        //{
+                 
+        //    return Json();
+        //} 
 
     }
 }

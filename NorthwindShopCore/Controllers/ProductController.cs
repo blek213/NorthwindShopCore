@@ -52,7 +52,7 @@ namespace NorthwindShopCore.Controllers
         [HttpGet("ConfectionJsonResult/{ConfectionId}")]
         public JsonResult ConfectionJsonResult(int? ConfectionId)
         {
-            var modelConfection = DbNorthWind.Products.Where(p => p.ProductId == ConfectionId);
+            IEnumerable<Products> modelConfection = DbNorthWind.Products.Where(p => p.ProductId == ConfectionId);
 
             return Json(modelConfection);
         }
@@ -147,12 +147,9 @@ namespace NorthwindShopCore.Controllers
         [HttpPost("isNullCookie")]
         public JsonResult isNullCookie()
         {
-            string cookieVal = Request.Cookies["ProductName"];
-
-            if(cookieVal == null)
+            if (Request.Cookies["ProductName"] != null)
             {
                 return Json("false");
-
             }
 
             return Json("true");
@@ -171,13 +168,6 @@ namespace NorthwindShopCore.Controllers
         {
             Response.Cookies.Delete("ProductName");
 
-            return new HttpResponseMessage(HttpStatusCode.Accepted);
-
-        }
-
-        [HttpDelete()]
-        public HttpResponseMessage ForFun()
-        {
             return new HttpResponseMessage(HttpStatusCode.Accepted);
 
         }

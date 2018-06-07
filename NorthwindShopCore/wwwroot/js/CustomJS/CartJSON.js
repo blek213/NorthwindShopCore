@@ -12,8 +12,6 @@ function ShowProducts() {
             if (data != null) {
                 var resuts = $("#ProductList");
 
-                console.log(data);
-
                 var discountOrNot;
 
                 if (data.obj.discontinued == true) {
@@ -35,11 +33,8 @@ function ShowProducts() {
 function BuyProduct() {
     var name = localStorage.getItem("UserName");
 
-    var isCartEmpy = IsCartEmpyFunc();
+    //var isCartEmpy = false; //IsCartEmpyFunc();
 
-    alert(isCartEmpy);
-
-    if (isCartEmpy == false) {
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -54,7 +49,6 @@ function BuyProduct() {
             },
             success: function (data) {
 
-                alert(data);
 
             },
             error: function () {
@@ -63,15 +57,9 @@ function BuyProduct() {
             }
 
         });
-    }
-
-    else if (isCartEmpy == true) {
-        swal("Error", "The Cart is empy", "error");
-
-    }
- 
+    
 }
-
+/*
 function IsCartEmpyFunc() {
     var resultBool;
 
@@ -88,9 +76,6 @@ function IsCartEmpyFunc() {
                 resultBool = true;
 
             }
-
-
-
             if (data == false) {
 
                 resultBool=false;
@@ -105,7 +90,7 @@ function IsCartEmpyFunc() {
 
     return resultBool;
 }
-
+*/
 function DeleteProducts() {
 
     $.ajax({
