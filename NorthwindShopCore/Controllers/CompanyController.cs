@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,5 +28,30 @@ namespace NorthwindShopCore.Controllers
             return Json(companyData);
         }
 
+        [HttpPost("SignInChat")]
+        public JsonResult SignInChat(string nickname)
+        {
+            string key = "NickName";
+            string value = nickname;
+
+            if(value == null)
+            {
+                return Json(HttpStatusCode.BadRequest);
+            }
+
+            CookieOptions option = new CookieOptions();
+
+            option.Expires = DateTime.Now.AddDays(30);
+
+            Response.Cookies.Append(key, value, option);
+
+            return Json(HttpStatusCode.Accepted);
+        }
+
+        [HttpPost("GetNickNameByCookie")]
+        public JsonResult GetNickNameByCookie()
+        {
+            return Json(Request.Cookies["NickName"]);
+        }
     }
 }

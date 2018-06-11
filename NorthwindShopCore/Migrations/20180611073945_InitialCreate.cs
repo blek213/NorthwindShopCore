@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace NorthwindShopCore.Migrations.CompaniesRange
+namespace NorthwindShopCore.Migrations
 {
-    public partial class SecondmgrforpostgressSQL : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

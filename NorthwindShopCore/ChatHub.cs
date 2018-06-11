@@ -8,9 +8,9 @@ namespace NorthwindShopCore
 {
     public class ChatHub: Hub
     {
-        public async Task Send(string message)
+        public async Task Send()
         {
-            await this.Clients.All.SendAsync("Send", message);
+            await this.Clients.All.SendAsync("Send", "It's good weather today... ");
         }
     }
 }

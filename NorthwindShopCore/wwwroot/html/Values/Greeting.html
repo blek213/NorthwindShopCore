@@ -5,7 +5,7 @@
     <title></title>
 
     <script src="../../kendo-ui/js/jquery.js" type="text/javascript"></script>
-
+    <script src="../../signalr/dist/browser/signalr.js"></script>
 
 </head>
 <body>
@@ -42,22 +42,38 @@
             </div>
 
         </div>
-        <div  id="content" class="col-md-9">
+        <div id="content" class="col-md-9">
             <h1>Hello! We happy to see you in our shop. Have a nice day :) </h1>
             <br />
             <br />
             <br />
             <br />
             <h1 style="text-align:center;">Best regards, Jessica shop! </h1>
-
+            <br /><br /><br /><br />
+            <p style="text-align:center;"><input id="sendBtn" type="button" value="Become known about the weather!"></p>
         </div>
-</div>
-        <span id="fromIndexFooter">
+    </div>
+    <span id="fromIndexFooter">
 
-        </span>
-        <script src="../../js/CustomJS/ConnectHtml.js" type="text/javascript"></script>
+    </span>
+    <script src="../../js/CustomJS/ConnectHtml.js" type="text/javascript"></script>
 
+        <script>
+        var hubUrl = "http://localhost:50915/chat";
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/chat")
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+        hubConnection.on("Send", function (data) {
 
+            alert(data);
+
+        });
+        document.getElementById("sendBtn").addEventListener("click", function (e) {
+            hubConnection.invoke("Send");
+        });
+        hubConnection.start();
+    </script>
 
 </body>
 </html>

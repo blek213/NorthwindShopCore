@@ -2,16 +2,18 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NorthwindShopCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace NorthwindShopCore.Migrations.CompaniesRange
+namespace NorthwindShopCore.Migrations
 {
     [DbContext(typeof(CompaniesRangeContext))]
-    partial class CompaniesRangeContextModelSnapshot : ModelSnapshot
+    [Migration("20180611073945_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

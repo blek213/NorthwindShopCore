@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../../js/jquery.js"></script>
+</head>
+<body>
+    <script>
+        function SignInFunc() {
+
+            var nickname = $("#nickname").val();
+
+            setTimeout(GetHttpResponse, 1);
+
+            function GetHttpResponse() {
+                $.getJSON({
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/JSON',
+                    url: '/api/Company/SignInChat?nickname=' + nickname,
+                    async: false,
+                    success: function (data) {
+
+                        if (data == 202) {
+                            window.location.href="chat.html"
+                        }
+
+                    },
+                    error: function (x, y, z) {
+
+                    }
+                });
+            }
+
+        }
+
+
+    </script>
+
+    <form>
+        <label>NickName</label><br /><br />
+        <input type="text" name="nickname" id="nickname" /><br /><br />
+        <input type="button" value="Signin" onclick="return SignInFunc();" />
+    </form>
+
+
+</body>
+</html>
