@@ -46,6 +46,12 @@ namespace NorthwindShopCore
             services.AddDbContext<IdentityDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddEntityFrameworkNpgsql().AddDbContext<CompaniesRangeContext>(options =>
+            options.UseNpgsql(Configuration.GetConnectionString("PostgressConnectionNumberOne")));
+
+            services.AddEntityFrameworkNpgsql().AddDbContext<CompaniesRangeJSONContext>(options => 
+            options.UseNpgsql(Configuration.GetConnectionString("PostgressConnectionNumberTwo")));
+
             services.AddIdentity<IdentityUser, IdentityRole>()
            .AddEntityFrameworkStores<IdentityDbContext>();
 

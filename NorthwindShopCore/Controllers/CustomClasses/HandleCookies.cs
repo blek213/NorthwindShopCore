@@ -12,5 +12,6 @@ namespace NorthwindShopCore.Controllers.CustomClasses
         {
             return Request.Cookies["NickName"];
         } 
+
     }
 }
