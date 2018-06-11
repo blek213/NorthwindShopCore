@@ -29,12 +29,15 @@ namespace NorthwindShopCore.Controllers
         }
 
         [HttpPost("SignInChat")]
-        public JsonResult SignInChat(string nickname)
+        public JsonResult SignInChat(string nickname, string group)
         {
-            string key = "NickName";
-            string value = nickname;
+            string NickNamekey = "NickName";
+            string NickNamekeyvalue = nickname;
 
-            if(value == null)
+            string GroupKey = "Group";
+            string GroupValue = group;
+
+            if(NickNamekeyvalue == null)
             {
                 return Json(HttpStatusCode.BadRequest);
             }
@@ -43,8 +46,9 @@ namespace NorthwindShopCore.Controllers
 
             option.Expires = DateTime.Now.AddDays(30);
 
-            Response.Cookies.Append(key, value, option);
-
+            Response.Cookies.Append(NickNamekey, NickNamekeyvalue, option);
+            Response.Cookies.Append(GroupKey, GroupValue, option);
+            
             return Json(HttpStatusCode.Accepted);
         }
 
@@ -53,5 +57,6 @@ namespace NorthwindShopCore.Controllers
         {
             return Json(Request.Cookies["NickName"]);
         }
+
     }
 }

@@ -6,13 +6,11 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NorthwindShopCore.Controllers.CustomClasses;
 
 namespace NorthwindShopCore.WebSocets
 {
     public class ChatMessageHandler : WebSocketHandler
     {
-        HandleCookies handleCookies = new HandleCookies();
 
 
         public ChatMessageHandler(WebSocketConnectionManager webSocketConnectionManager) : base(webSocketConnectionManager)

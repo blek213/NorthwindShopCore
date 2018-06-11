@@ -10,6 +10,7 @@
 <body>
 
     <script language="javascript" type="text/javascript" >
+
         isUSerTypedName();
 
         function isUSerTypedName() {
@@ -78,11 +79,9 @@
                 var cookieVal = GetNickNameByCookie();
 
                 var sendmsg = cookieVal + " said: " + message;
-                //Get cookie and append to to message string in beggining... 
                 console.log("Sending: " + message);
                 socket.send(sendmsg);
-            }
-          
+            }       
         }
 
         function appendItem(list, message) {
@@ -103,7 +102,7 @@
                 async: false,
                 success: function (data) {
 
-                    NickNameResult = data;
+                   
                 },
                 error: function (x, y, z) {
 
