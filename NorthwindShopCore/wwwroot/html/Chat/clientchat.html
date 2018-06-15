@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Client chat</title>
 
     <script src="../../js/jquery.js"></script>
 
@@ -26,7 +26,6 @@
                         window.location.href = "signInChat.html";
                     }
 
-
                 },
                 error: function (x, y, z) {
 
@@ -42,7 +41,7 @@
     <ul id="messages"></ul>
 
     <script language="javascript" type="text/javascript">
-        var uri = "ws://" + window.location.host + "/ws";
+        var uri = "ws://" + window.location.host + "/clientgroup";
         function connect() {
             socket = new WebSocket(uri);
             socket.onopen = function (event) {
@@ -102,7 +101,7 @@
                 async: false,
                 success: function (data) {
 
-                   
+                    NickNameResult = data;
                 },
                 error: function (x, y, z) {
 
@@ -111,8 +110,6 @@
 
             return NickNameResult;
         }
-
-       
 
     </script>
 

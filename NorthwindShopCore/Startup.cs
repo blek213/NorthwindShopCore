@@ -118,12 +118,14 @@ namespace NorthwindShopCore
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<ChatHub>("/chat");
+                routes.MapHub<ChatHub>("/chatAuth");
             });
 
             app.UseWebSockets();
 
-            app.MapWebSocketManager("/ws", serviceProvider.GetService<ChatMessageHandler>());
+            app.MapWebSocketManager("/clientgroup", serviceProvider.GetService<ChatMessageHandler>());
+            app.MapWebSocketManager("/bussinessgroup", serviceProvider.GetService<ChatMessageHandler>());
+            app.MapWebSocketManager("/supportgroup", serviceProvider.GetService<ChatMessageHandler>());
 
             app.UseMvc();
         }

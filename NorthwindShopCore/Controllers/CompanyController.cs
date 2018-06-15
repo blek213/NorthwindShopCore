@@ -28,6 +28,7 @@ namespace NorthwindShopCore.Controllers
             return Json(companyData);
         }
 
+        /*
         [HttpPost("SignInChat")]
         public JsonResult SignInChat(string nickname, string group)
         {
@@ -57,6 +58,6 @@ namespace NorthwindShopCore.Controllers
         {
             return Json(Request.Cookies["NickName"]);
         }
-
+        */
     }
 }
