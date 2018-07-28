@@ -43,7 +43,6 @@ namespace NorthwindShopCore.Controllers
         public async Task<JsonResult> Login(string name, string password)
         {
             var identity =  await GetIdentityLogin(name, password);
-
           
             if(identity != null)
             {
@@ -122,6 +121,14 @@ namespace NorthwindShopCore.Controllers
 
         }
 
+        [Route("ChangeIdentity")]
+        public async Task<HttpResponseMessage> ChangeUserRole()
+        {
+           
+
+            return new HttpResponseMessage(HttpStatusCode.Accepted);
+        } 
+
         public void AddToRoleAsyncFunc(IdentityUser User, IdentityRole roleUser)
         {
             _userManager.AddToRoleAsync(User, roleUser.Name);
@@ -161,6 +168,7 @@ namespace NorthwindShopCore.Controllers
             return null;
 
         }
+
 
         private ClaimsIdentity GetIdentityRegister(string username, string password)
         {

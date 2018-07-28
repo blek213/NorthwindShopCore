@@ -82,16 +82,7 @@ namespace NorthwindShopCore
                       };
 
                   });
-
-            // Если добавить это, то при проверки аудентификации будет ошибка 500
-            //services.AddAuthentication(sharedOptions =>
-            //{
-            //    sharedOptions.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //    sharedOptions.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //    sharedOptions.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-
-            //    sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-            //});
+     
 
             services.AddAuthorization(options =>
             {
@@ -101,6 +92,7 @@ namespace NorthwindShopCore
             });
 
             services.AddMvc();
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
@@ -118,12 +110,14 @@ namespace NorthwindShopCore
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<ChatHub>("/chat");
+                routes.MapHub<ChatHub>("/chatAuth");
             });
 
             app.UseWebSockets();
 
-            app.MapWebSocketManager("/ws", serviceProvider.GetService<ChatMessageHandler>());
+            app.MapWebSocketManager("/clientgroup", serviceProvider.GetService<ChatMessageHandler>());
+            app.MapWebSocketManager("/bussinessgroup", serviceProvider.GetService<ChatMessageHandler>());
+            app.MapWebSocketManager("/supportgroup", serviceProvider.GetService<ChatMessageHandler>());
 
             app.UseMvc();
         }

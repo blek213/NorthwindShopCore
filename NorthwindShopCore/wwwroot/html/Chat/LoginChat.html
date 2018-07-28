@@ -30,7 +30,19 @@
                         success: function (data) {
 
                             if (data == 202) {
-                                window.location.href = "chat.html"
+
+                                if (selectedValue == "clientgroup") {
+                                    
+                                    window.location.href = "clientchat.html";
+                                }
+                                else if (selectedValue == "bussinessgroup") {
+
+                                    window.location.href = "bussinesschat.html";
+                                }
+                                else if (selectedValue == "supportgroup") {
+
+                                    window.location.href = "supportchat.html";
+                                }
                             }
 
                         },
