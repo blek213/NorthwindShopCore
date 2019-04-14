@@ -24,7 +24,6 @@ function ShowProduct() {
 }
 
 function ParseIdFromUrl(CurrentUrl) {
-
     var GetIndexBeforeId = CurrentUrl.indexOf("al=");
 
     for (var i = 0; i < 3; i++) {
@@ -34,5 +33,4 @@ function ParseIdFromUrl(CurrentUrl) {
     var ProductId = CurrentUrl.slice(GetIndexBeforeId, 200);
 
     return ProductId;
-
 }

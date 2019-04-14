@@ -11,22 +11,14 @@ namespace NorthwindShopCore.WebSocets
 {
     public class ChatMessageHandler : WebSocketHandler
     {
-
-
         public ChatMessageHandler(WebSocketConnectionManager webSocketConnectionManager) : base(webSocketConnectionManager)
         {
 
         }
 
-
         public override async Task OnConnected(WebSocket socket)
-        {
-              
+        {        
             await base.OnConnected(socket);
-
-            /*
-            await SendMessageToAllAsync($"is now connected");
-            */
         }
 
         public override async Task ReceiveAsync(WebSocket socket, WebSocketReceiveResult result, byte[] buffer)
@@ -35,6 +27,5 @@ namespace NorthwindShopCore.WebSocets
 
             await SendMessageToAllAsync(message);
         }
-
     }
 }

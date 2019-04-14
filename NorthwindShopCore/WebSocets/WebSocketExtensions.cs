@@ -32,6 +32,5 @@ namespace NorthwindShopCore.WebSocets
 
             return services;
         }
-
     }
 }

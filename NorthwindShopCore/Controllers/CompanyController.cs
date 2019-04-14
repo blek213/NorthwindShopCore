@@ -17,30 +17,19 @@ namespace NorthwindShopCore.Controllers
         CompaniesRangeContext companiesRangeContext = new CompaniesRangeContext();
 
         [HttpPost("ShowContributors")]
-        public JsonResult ShowContributors()
-        {
-            //var companyData = companiesRangeContext.Company.FromSql("SELECT company.name as CompanyName,owner.name AS ownername,companytype.nametype,company.profitperyear," +
-            //    "COUNT(*) AS CountInvestors FROM company JOIN investor ON company.companyid=investor.companyid JOIN owner ON company.ownerid=owner.ownerid JOIN companytype " +
-            //    "ON company.typeid=companytype.companytypeid GROUP BY company.name,owner.name,companytype.nametype,company.profitperyear");
-
-            IEnumerable<Company> companyData = companiesRangeContext.Company.ToList();
-
-            return Json(companyData);
+        public JsonResult ShowContributors() {          
+            return Json(companiesRangeContext.Company.ToList());
         }
 
-
-        /*
         [HttpPost("SignInChat")]
-        public JsonResult SignInChat(string nickname, string group)
-        {
+        public JsonResult SignInChat(string nickname, string group) {
             string NickNamekey = "NickName";
             string NickNamekeyvalue = nickname;
 
             string GroupKey = "Group";
             string GroupValue = group;
 
-            if(NickNamekeyvalue == null)
-            {
+            if (NickNamekeyvalue == null) {
                 return Json(HttpStatusCode.BadRequest);
             }
 
@@ -50,15 +39,14 @@ namespace NorthwindShopCore.Controllers
 
             Response.Cookies.Append(NickNamekey, NickNamekeyvalue, option);
             Response.Cookies.Append(GroupKey, GroupValue, option);
-            
+
             return Json(HttpStatusCode.Accepted);
         }
 
         [HttpPost("GetNickNameByCookie")]
-        public JsonResult GetNickNameByCookie()
-        {
+        public JsonResult GetNickNameByCookie() {
             return Json(Request.Cookies["NickName"]);
         }
-        */
+
     }
 }

@@ -10,7 +10,6 @@ namespace NorthwindShopCore.WebSocets
 {
     public abstract class WebSocketHandler
     {
-
         protected WebSocketConnectionManager WebSocketConnectionManager { get; set; }
 
         public WebSocketHandler(WebSocketConnectionManager webSocketConnectionManager)

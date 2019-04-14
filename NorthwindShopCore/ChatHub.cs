@@ -12,5 +12,6 @@ namespace NorthwindShopCore
         {
             await this.Clients.All.SendAsync("Send", "It's good weather today... ");
         }
+
     }
 }

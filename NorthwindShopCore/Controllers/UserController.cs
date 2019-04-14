@@ -5,18 +5,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
-using System.Security.Principal;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using NorthwindShopCore.Filters;
 using NorthwindShopCore.Models;
 
 namespace NorthwindShopCore.Controllers
@@ -40,12 +35,10 @@ namespace NorthwindShopCore.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<JsonResult> Login(string name, string password)
-        {
+        public async Task<JsonResult> Login(string name, string password) {
             var identity =  await GetIdentityLogin(name, password);
           
-            if(identity != null)
-            {
+            if(identity != null) {
                 var now = DateTime.UtcNow;
 
                 var jwt = new JwtSecurityToken(
@@ -57,18 +50,11 @@ namespace NorthwindShopCore.Controllers
                         signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-                //HttpContext.SignInAsync(IdentityConstants.ExternalScheme, new ClaimsPrincipal(identity));
-
-                var response = new
-                {
+                var response = new {
                     access_token = encodedJwt,
                     username = identity.Name
                 };
 
-                //Response.ContentType = "application/json";
-                //Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
-
-                //  return Json(new { AccessJson=JsonResult, HttpCode=HttpStatusCode.Accepted });
                 return Json(new { JsonResponseRes = response, JsonHttpStatusCode = HttpStatusCode.Accepted });
             }
 
@@ -76,22 +62,19 @@ namespace NorthwindShopCore.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<JsonResult> Register(string name, string email, string password, string repeatpassword)
-        {
+        public async Task<JsonResult> Register(string name, string email, string password, string repeatpassword) {
             IdentityUser User = new IdentityUser { Email = email, UserName = name };
 
             var roleUser = new IdentityRole { Name = "user" };
 
-             await _roleManager.CreateAsync(roleUser);
+            await _roleManager.CreateAsync(roleUser);
 
             var result =  _userManager.CreateAsync(User, password);
 
-            if (result != null)
-            {
+            if (result != null) {
                 var identity = GetIdentityRegister(name, password);
 
-                if (identity == null)
-                {
+                if (identity == null) {
                     AddToRoleAsyncFunc(User, roleUser);
 
                     var now = DateTime.UtcNow;
@@ -107,8 +90,7 @@ namespace NorthwindShopCore.Controllers
                             signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
                     var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-                    var response = new
-                    {
+                    var response = new {
                         access_token = encodedJwt,
                         username = identity.Name
                     };
@@ -116,26 +98,19 @@ namespace NorthwindShopCore.Controllers
                     return Json(new { JsonResponseRes = response, JsonHttpStatusCode = HttpStatusCode.Accepted });
                 }
             }
-
             return Json(HttpStatusCode.Forbidden);
-
         }
 
         [Route("ChangeIdentity")]
-        public async Task<HttpResponseMessage> ChangeUserRole()
-        {
-           
-
+        public async Task<HttpResponseMessage> ChangeUserRole() {
             return new HttpResponseMessage(HttpStatusCode.Accepted);
         } 
 
-        public void AddToRoleAsyncFunc(IdentityUser User, IdentityRole roleUser)
-        {
+        private void AddToRoleAsyncFunc(IdentityUser User, IdentityRole roleUser) {
             _userManager.AddToRoleAsync(User, roleUser.Name);
         }
 
-        private async Task<ClaimsIdentity> GetIdentityLogin(string name, string password)
-        {
+        private async Task<ClaimsIdentity> GetIdentityLogin(string name, string password) {
             List<IdentityUser> identityUsers = _userManager.Users.ToList();
 
             IdentityUser user = identityUsers.FirstOrDefault(p => p.UserName == name);
@@ -145,89 +120,57 @@ namespace NorthwindShopCore.Controllers
             if (user != null && checkPassword.Result == true)
             {
                 var roles = await _userManager.GetRolesAsync(user);
-
-                var claims = new List<Claim>
-                {
+                
+                var claims = new List<Claim> {
                     new Claim(ClaimsIdentity.DefaultNameClaimType,user.UserName)
-
                 };
 
-                foreach (var role in roles)
-                {
+                foreach (var role in roles) {
                     claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, role));
                 }
 
-
-                ClaimsIdentity claimsIdentity =
-              new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                  ClaimsIdentity.DefaultRoleClaimType);
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+                ClaimsIdentity.DefaultRoleClaimType);
 
                 return claimsIdentity;
             }
-
             return null;
-
         }
 
-
-        private ClaimsIdentity GetIdentityRegister(string username, string password)
-        {
+        private ClaimsIdentity GetIdentityRegister(string username, string password) {
             List<IdentityUser> identityUsers = _userManager.Users.ToList();
 
             IdentityUser user = identityUsers.FirstOrDefault(p => p.UserName == username );
 
-            if (user != null)
-            {
+            if (user != null) {
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimsIdentity.DefaultNameClaimType,username),
                     new Claim(ClaimsIdentity.DefaultRoleClaimType,"user")
                 };
 
-                ClaimsIdentity claimsIdentity =
-              new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                  ClaimsIdentity.DefaultRoleClaimType);
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+                ClaimsIdentity.DefaultRoleClaimType);
                 return claimsIdentity;
             }
-
             return null;
         }
 
-        public ClaimsIdentity SendClaimsInRegister(string username)
-        {
-            var claims = new List<Claim>
-                {
+        private ClaimsIdentity SendClaimsInRegister(string username) {
+            var claims = new List<Claim> {
                     new Claim(ClaimsIdentity.DefaultNameClaimType,username),
                     new Claim(ClaimsIdentity.DefaultRoleClaimType,"user")
                 };
 
-            ClaimsIdentity claimsIdentity =
-          new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-              ClaimsIdentity.DefaultRoleClaimType);
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+            ClaimsIdentity.DefaultRoleClaimType);
             return claimsIdentity;
         }
 
-        [HttpPost("IsAuth")]
-        [Authorize(Roles = "user")]
-        public JsonResult IsAuth()
-        {
-          
-            return Json(HttpStatusCode.Accepted);
-        }
-        
         [HttpPost("LogOff")]
-        public JsonResult LogOff()
-        {
+        public JsonResult LogOff() {
             HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
             return Json(HttpStatusCode.Accepted);
         }
-
-        //public JsonResult GetTokens()
-        //{
-                 
-        //    return Json();
-        //} 
-
     }
 }
